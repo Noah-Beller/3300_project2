@@ -1,1 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Project 2</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      Promise.all([
+        d3.csv("data/player_data.csv"),
+        d3.csv("data/Seasons_Stats.csv"),
+        d3.tsv("data/NBA_Draft_1980_2017.tsv")
+      ]).then(function(data){
+          //FILTERING OF DATA
 
+
+          // console.log(season_stats);
+          let top_ten_picks = data[2].filter(d => d['year'] > "2002" && d['pick'] < 11)
+
+          top_ten_picks[0]['player'] = 'James, LeBron'
+          top_ten_picks[8]['player'] = 'Sweetney, Mike'
+
+          //Lebron and Michael's names were input incorrectly
+
+          top_ten_stats = [];
+          top_ten_picks.forEach(function(c, j){
+            let player_name = c['player'];
+            let season_stats = data[1].filter(g => g['Year'] > 2003);
+            if(player_name.includes(",")){
+              split_name = player_name.split(",")
+              new_name = split_name[1].concat(" " + split_name[0]);
+              new_name =  new_name.replace(/ /,"");
+              new_name =  new_name.replace(/č/,"c");
+              new_name =  new_name.replace(/ć/,"c");
+              new_name =  new_name.replace(/ú/,"u");
+              new_name =  new_name.replace(/\. /,".");
+
+            }
+            else{
+              new_name = player_name
+            };
+            c['player'] = new_name;
+            // console.log(new_name);
+            season_stats.forEach(function(d,i){
+              if(d['Player'] === new_name ){
+                top_ten_stats.push(d);
+              };
+            });
+            // console.log(season_stats);
+          });
+
+          draft_03 = data[2].filter(d => d['year'] === "2003" && d['pick'] < 11)
+          draft_04 = data[2].filter(d => d['year'] === "2004" && d['pick'] < 11)
+          draft_05 = data[2].filter(d => d['year'] === "2005" && d['pick'] < 11)
+          draft_06 = data[2].filter(d => d['year'] === "2006" && d['pick'] < 11)
+          draft_07 = data[2].filter(d => d['year'] === "2007" && d['pick'] < 11)
+          draft_08 = data[2].filter(d => d['year'] === "2008" && d['pick'] < 11)
+          draft_09 = data[2].filter(d => d['year'] === "2009" && d['pick'] < 11)
+          draft_10 = data[2].filter(d => d['year'] === "2010" && d['pick'] < 11)
+          draft_11 = data[2].filter(d => d['year'] === "2011" && d['pick'] < 11)
+          draft_12 = data[2].filter(d => d['year'] === "2012" && d['pick'] < 11)
+          draft_13 = data[2].filter(d => d['year'] === "2013" && d['pick'] < 11)
+          draft_14 = data[2].filter(d => d['year'] === "2014" && d['pick'] < 11)
+          draft_15 = data[2].filter(d => d['year'] === "2015" && d['pick'] < 11)
+          draft_16 = data[2].filter(d => d['year'] === "2016" && d['pick'] < 11)
+          draft_17 = data[2].filter(d => d['year'] === "2017" && d['pick'] < 11)
+
+
+          stats_03 = [];
+          rookie_stats_03 = [];
+          draft_03.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_03.push(d);
+              if(d['Year'] === "2004"){
+                rookie_stats_03.push(d);
+              };
+            };
+            });
+          });
+
+          stats_04 = [];
+          rookie_stats_04 = [];
+          draft_04.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_04.push(d);
+              if(d['Year'] === "2005"){
+                rookie_stats_04.push(d);
+              };
+            };
+            });
+          });
+
+          stats_05 = [];
+          rookie_stats_05 = [];
+          draft_05.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_05.push(d);
+              if(d['Year'] === "2006"){
+                rookie_stats_05.push(d);
+              };
+            };
+            });
+          });
+
+          stats_06 = [];
+          rookie_stats_06 = [];
+          draft_06.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_06.push(d);
+              if(d['Year'] === "2007"){
+                rookie_stats_06.push(d);
+              };
+            };
+            });
+          });
+
+          stats_07 = [];
+          rookie_stats_07 = [];
+          draft_07.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_07.push(d);
+              if(d['Year'] === "2008"){
+                rookie_stats_07.push(d);
+              };
+            };
+            });
+          });
+
+          stats_08 = [];
+          rookie_stats_08 = [];
+          draft_08.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_08.push(d);
+              if(d['Year'] === "2009"){
+                rookie_stats_08.push(d);
+              };
+            };
+            });
+          });
+
+          stats_09 = [];
+          rookie_stats_09 = [];
+          draft_09.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_09.push(d);
+              if(d['Year'] === "2010"){
+                rookie_stats_09.push(d);
+              };
+            };
+            });
+          });
+
+          stats_10 = [];
+          rookie_stats_10 = [];
+          draft_10.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_10.push(d);
+              if(d['Year'] === "2011"){
+                rookie_stats_10.push(d);
+              };
+            };
+            });
+          });
+
+          stats_11 = [];
+          rookie_stats_11 = [];
+          draft_11.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_11.push(d);
+              if(d['Year'] === "2012"){
+                rookie_stats_11.push(d);
+              };
+            };
+            });
+          });
+
+          stats_12 = [];
+          rookie_stats_12 = [];
+          draft_12.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_12.push(d);
+              if(d['Year'] === "2013"){
+                rookie_stats_12.push(d);
+              };
+            };
+            });
+          });
+
+          stats_13 = [];
+          rookie_stats_13 = [];
+          draft_13.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_13.push(d);
+              if(d['Year'] === "2014"){
+                rookie_stats_13.push(d);
+              };
+            };
+            });
+          });
+
+          stats_14 = [];
+          rookie_stats_14 = [];
+          draft_14.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_14.push(d);
+              if(d['Year'] === "2015"){
+                rookie_stats_14.push(d);
+              };
+            };
+            });
+          });
+
+          stats_15 = [];
+          rookie_stats_15 = [];
+          draft_15.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_15.push(d);
+              if(d['Year'] === "2016"){
+                rookie_stats_15.push(d);
+              };
+            };
+            });
+          });
+
+          stats_16 = [];
+          rookie_stats_16 = [];
+          draft_16.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_16.push(d);
+              if(d['Year'] === "2017"){
+                rookie_stats_16.push(d);
+              };
+            };
+            });
+          });
+
+          stats_17 = [];
+          rookie_stats_17 = [];
+          draft_17.forEach(function(c,j){
+            top_ten_stats.forEach(function(d,i){
+            if(d["Player"] === c['player']){
+              stats_17.push(d);
+              if(d['Year'] === "2018"){
+                rookie_stats_17.push(d);
+              };
+            };
+            });
+          });
+
+
+        });
+    </script>
+  </body>
+</html>
