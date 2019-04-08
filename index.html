@@ -6,6 +6,29 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
   </head>
   <body>
+    <svg id = "pts" height = "600" width = "950">
+
+    </svg>
+
+    <div id="slider_div_pts">
+
+    </div>
+
+    <svg id = 'per' height = "600" width = "950">
+
+    </svg>
+
+    <div id="slider_div_PER">
+
+    </div>
+
+    <svg id = 'eFG' height = "600" width = "950">
+
+    </svg>
+
+    <div id= "slider_div_eFG">
+
+    </div>
     <script>
       Promise.all([
         d3.csv("data/player_data.csv"),
@@ -20,6 +43,7 @@
 
           top_ten_picks[0]['player'] = 'James, LeBron'
           top_ten_picks[8]['player'] = 'Sweetney, Mike'
+          top_ten_picks[46]['player'] = 'Jianlian, Yi'
 
           //Lebron and Michael's names were input incorrectly
 
@@ -34,6 +58,8 @@
               new_name =  new_name.replace(/č/,"c");
               new_name =  new_name.replace(/ć/,"c");
               new_name =  new_name.replace(/ú/,"u");
+              new_name =  new_name.replace(/ū/,"u");
+              new_name =  new_name.replace(/ý/,"y");
               new_name =  new_name.replace(/\. /,".");
 
             }
@@ -67,16 +93,22 @@
           draft_17 = data[2].filter(d => d['year'] === "2017" && d['pick'] < 11)
 
 
+          console.log(top_ten_picks)
+
           stats_03 = [];
           rookie_stats_03 = [];
           draft_03.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
-            if(d["Player"] === c['player']){
-              stats_03.push(d);
-              if(d['Year'] === "2004"){
-                rookie_stats_03.push(d);
+            if(d["tm"] === "TOT"){
+
+            }
+              if(d["Player"] === c['player']){
+                d["PPG"] = d["PTS"]/d["G"];
+                stats_03.push(d);
+                if(d['Year'] === "2004"){
+                  rookie_stats_03.push(d);
+                };
               };
-            };
             });
           });
 
@@ -85,6 +117,7 @@
           draft_04.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_04.push(d);
               if(d['Year'] === "2005"){
                 rookie_stats_04.push(d);
@@ -98,6 +131,7 @@
           draft_05.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_05.push(d);
               if(d['Year'] === "2006"){
                 rookie_stats_05.push(d);
@@ -111,6 +145,7 @@
           draft_06.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_06.push(d);
               if(d['Year'] === "2007"){
                 rookie_stats_06.push(d);
@@ -124,6 +159,7 @@
           draft_07.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_07.push(d);
               if(d['Year'] === "2008"){
                 rookie_stats_07.push(d);
@@ -137,6 +173,7 @@
           draft_08.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_08.push(d);
               if(d['Year'] === "2009"){
                 rookie_stats_08.push(d);
@@ -150,6 +187,7 @@
           draft_09.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_09.push(d);
               if(d['Year'] === "2010"){
                 rookie_stats_09.push(d);
@@ -163,6 +201,7 @@
           draft_10.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_10.push(d);
               if(d['Year'] === "2011"){
                 rookie_stats_10.push(d);
@@ -176,6 +215,7 @@
           draft_11.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_11.push(d);
               if(d['Year'] === "2012"){
                 rookie_stats_11.push(d);
@@ -189,6 +229,7 @@
           draft_12.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_12.push(d);
               if(d['Year'] === "2013"){
                 rookie_stats_12.push(d);
@@ -202,6 +243,7 @@
           draft_13.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_13.push(d);
               if(d['Year'] === "2014"){
                 rookie_stats_13.push(d);
@@ -215,6 +257,7 @@
           draft_14.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_14.push(d);
               if(d['Year'] === "2015"){
                 rookie_stats_14.push(d);
@@ -228,6 +271,7 @@
           draft_15.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_15.push(d);
               if(d['Year'] === "2016"){
                 rookie_stats_15.push(d);
@@ -241,6 +285,7 @@
           draft_16.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_16.push(d);
               if(d['Year'] === "2017"){
                 rookie_stats_16.push(d);
@@ -254,6 +299,7 @@
           draft_17.forEach(function(c,j){
             top_ten_stats.forEach(function(d,i){
             if(d["Player"] === c['player']){
+              d["PPG"] = d["PTS"]/d["G"];
               stats_17.push(d);
               if(d['Year'] === "2018"){
                 rookie_stats_17.push(d);
@@ -262,6 +308,186 @@
             });
           });
 
+          let pts = d3.select("svg#pts");
+          let pts_chart = pts.append('g');
+
+          let pts_scale = d3.scaleLinear().domain([30, 0]).range([0, 500]);
+          let player_scale = d3.scaleLinear().domain([10, 0]).range([800, 0]);
+
+          let x_axis = d3.axisBottom(player_scale).ticks(0);
+          var y_axis_pts = d3.axisLeft(pts_scale).ticks(7);
+
+          x_scale = pts.append("g")
+              .attr("transform","translate(80,510)")
+              .call(x_axis);
+
+
+          var slider_container = d3.selectAll("#slider_div_pts").append("div");
+
+          let rookie_classes = [rookie_stats_03,rookie_stats_04,rookie_stats_05,rookie_stats_06,rookie_stats_07,rookie_stats_08,rookie_stats_09,rookie_stats_10,rookie_stats_11,rookie_stats_12,rookie_stats_13,rookie_stats_14,rookie_stats_15,rookie_stats_16,rookie_stats_17];
+
+
+          function show_pts(year){
+            let index = 1;
+            let rookie_class = rookie_classes[year];
+            y_scale = pts.append("g")
+                .attr("transform","translate(80,10)")
+                .call(y_axis_pts);
+
+              rookie_class.forEach(function(d,i){
+              pts_chart.append('rect')
+                  .attr("width", "20")
+                  .attr("height", 500 - pts_scale(d['PPG']))
+                  .attr("x", player_scale(index) - 20)
+                  .attr("y", 510 - (500 - pts_scale(d['PPG'])))
+                  .attr("stroke", "black")
+                  .style("fill", "orange")
+                  .attr("transform", "translate(80,0)")
+              pts.append('text')
+                  .attr("text-anchor", "middle")
+                  .attr("x", player_scale(index) + 70)
+                  .attr("y", 530)
+                  .attr("font-family","Apple Ligothic")
+                  .attr("font-size", "12px")
+                  .text(d['Player']);
+              index++
+            });
+          }
+
+          show_pts(0);
+
+          slider_container.append("input")
+              .attr("type", "range")
+              .attr("min", 0)
+              .attr("max", 14)
+              .attr("value", 0)
+              .attr("class", "slider")
+              .style("width", "300px")
+              .attr("step", 1)
+              .on("input", function(){
+                pts_chart.selectAll("rect").remove()
+                pts.selectAll("text").remove()
+                year = Number(this.value)
+                show_pts(year);
+              });
+
+// -------------------------------- PER -------------------------------
+          let per = d3.select("svg#per");
+          let per_chart = per.append('g');
+
+          let per_scale = d3.scaleLinear().domain([30, 0]).range([0, 500]);
+
+          var y_axis_per = d3.axisLeft(per_scale).ticks(7);
+
+          x_scale = per.append("g")
+              .attr("transform","translate(80,510)")
+              .call(x_axis);
+
+          var slider_container_PER = d3.selectAll("#slider_div_PER").append("div");
+
+
+          function show_per(year){
+            let index = 1;
+            let rookie_class = rookie_classes[year];
+            y_scale = per.append("g")
+                .attr("transform","translate(80,10)")
+                .call(y_axis_per);
+              rookie_class.forEach(function(d,i){
+              per_chart.append('rect')
+                  .attr("width", "20")
+                  .attr("height", 500 - per_scale(d['PER']))
+                  .attr("x", player_scale(index) - 20)
+                  .attr("y", 510 - (500 - per_scale(d['PER'])))
+                  .attr("stroke", "black")
+                  .style("fill", "orange")
+                  .attr("transform", "translate(80,0)")
+              per.append('text')
+                  .attr("text-anchor", "middle")
+                  .attr("x", player_scale(index) + 70)
+                  .attr("y", 530)
+                  .attr("font-family","Apple Ligothic")
+                  .attr("font-size", "12px")
+                  .text(d['Player']);
+              index++
+            });
+          }
+
+          show_per(0);
+          slider_container_PER.append("input")
+              .attr("type", "range")
+              .attr("min", 0)
+              .attr("max", 15)
+              .attr("value", 0)
+              .attr("class", "slider")
+              .style("width", "300px")
+              .attr("step", 1)
+              .on("input", function(){
+                per_chart.selectAll("rect").remove()
+                per.selectAll("text").remove()
+                year = Number(this.value)
+                show_per(year);
+              });
+
+          console.log(rookie_stats_03);
+          console.log(rookie_classes)
+
+        // ------------------------ eFG% ----------------------------
+
+        let eFG = d3.select("svg#eFG");
+        let eFG_chart = eFG.append('g');
+
+        let eFG_scale = d3.scaleLinear().domain([1, 0]).range([0, 500]);
+
+        var y_axis_eFG = d3.axisLeft(eFG_scale).ticks(10);
+
+        x_scale = eFG.append("g")
+            .attr("transform","translate(80,510)")
+            .call(x_axis);
+
+        var slider_container_eFG = d3.selectAll("#slider_div_eFG").append("div");
+
+
+        function show_eFG(year){
+          let index = 1;
+          let rookie_class = rookie_classes[year];
+          y_scale = eFG.append("g")
+              .attr("transform","translate(80,10)")
+              .call(y_axis_eFG);
+            rookie_class.forEach(function(d,i){
+            eFG_chart.append('rect')
+                .attr("width", "20")
+                .attr("height", 500 - eFG_scale(d['eFG%']))
+                .attr("x", player_scale(index) - 20)
+                .attr("y", 510 - (500 - eFG_scale(d['eFG%'])))
+                .attr("stroke", "black")
+                .style("fill", "orange")
+                .attr("transform", "translate(80,0)")
+            eFG.append('text')
+                .attr("text-anchor", "middle")
+                .attr("x", player_scale(index) + 70)
+                .attr("y", 530)
+                .attr("font-family","Apple Ligothic")
+                .attr("font-size", "12px")
+                .text(d['Player']);
+            index++
+          });
+        }
+
+        show_eFG(0);
+        slider_container_eFG.append("input")
+            .attr("type", "range")
+            .attr("min", 0)
+            .attr("max", 15)
+            .attr("value", 0)
+            .attr("class", "slider")
+            .style("width", "300px")
+            .attr("step", 1)
+            .on("input", function(){
+              eFG_chart.selectAll("rect").remove()
+              eFG.selectAll("text").remove()
+              year = Number(this.value)
+              show_eFG(year);
+            });
 
         });
     </script>
