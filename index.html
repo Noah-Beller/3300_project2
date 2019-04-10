@@ -6,6 +6,7 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
   </head>
   <body>
+    <svg id = "cumulative" height = "500" width = "1200"></svg>
     <svg id = "pts" height = "600" width = "950">
 
     </svg>
@@ -37,6 +38,7 @@
       ]).then(function(data){
           //FILTERING OF DATA
 
+        console.log(data);
 
           // console.log(season_stats);
           let top_ten_picks = data[2].filter(d => d['year'] > "2002" && d['pick'] < 11)
@@ -93,8 +95,26 @@
           draft_17 = data[2].filter(d => d['year'] === "2017" && d['pick'] < 11)
           draft_18 = data[2].filter(d => d['year'] === "2018" && d['pick'] < 11)
 
+<<<<<<< HEAD
           console.log(top_ten_picks);
           // console.log(top_ten_stats);
+=======
+
+          console.log(top_ten_picks);
+          console.log(top_ten_stats);
+
+          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 1);
+          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 2);
+          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 3);
+          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 4);
+          fifth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 5);
+          sixth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 6);
+          seventh_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 7);
+          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 8);
+          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 9);
+          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 10);
+          console.log(first_picks);
+>>>>>>> b0ff3fd01f539f1883f0aecfbf40dc10f1b17383
 
           stats_03 = [];
           rookie_stats_03 = [];
@@ -296,6 +316,30 @@
           });
 
 
+
+
+
+
+        // -------------------------------- Overview -------------------------------
+        
+          let overallDrafts = d3.select("svg#cumulative");
+          let overall_xscale = d3.scaleLinear().domain([2000,2020]).range([0,1150]);
+          let overall_xticks = []
+          for (var i=2000; i<=2020; i++){
+            overall_xticks.push(i);
+          }
+          let overall_xaxis = d3.axisBottom().scale(overall_xscale).tickValues(overall_xticks);
+          let overall_x_axis = overallDrafts.append("g")
+            .attr("transform", "translate(25, 450)")
+            .style("font","8px times")
+            .call(overall_xaxis);
+
+          let overall_yscale = d3.scaleLinear().domain([30,0]).range([0,450]);
+
+          console.log(rookie_stats_03);
+
+
+        // -------------------------------- PTS -------------------------------
 
           let pts = d3.select("svg#pts");
           let pts_chart = pts.append('g');
