@@ -62,6 +62,8 @@
               new_name =  new_name.replace(/ú/,"u");
               new_name =  new_name.replace(/ū/,"u");
               new_name =  new_name.replace(/ý/,"y");
+              new_name =  new_name.replace(/ģ/,"g");
+              new_name =  new_name.replace(/ņ/,"n");
               new_name =  new_name.replace(/\. /,".");
 
             }
@@ -354,13 +356,88 @@
 
           let rookie_classes = [rookie_stats_03,rookie_stats_04,rookie_stats_05,rookie_stats_06,rookie_stats_07,rookie_stats_08,rookie_stats_09,rookie_stats_10,rookie_stats_11,rookie_stats_12,rookie_stats_13,rookie_stats_14,rookie_stats_15,rookie_stats_16];
 
+          var missing = {}
           draft_07.forEach(function(c,j){
             rookie_stats_07.forEach(function(d,i){
-              if(c['Player']){
-
+              if(c['player'] === d['Player']){
+                if(j != i){
+                  missing['Player'] = draft_07[i]['player'];
+                  missing['PPG'] = 0;
+                  missing['PER'] = 0;
+                  missing['eFG%'] = 0;
+                  missing['Year'] = draft_07[i]['Year'];
+                  rookie_stats_07.splice(i, 0, missing)
+                }
               }
             });
           });
+
+          var missing = {}
+          draft_07.forEach(function(c,j){
+            rookie_stats_07.forEach(function(d,i){
+              if(c['player'] === d['Player']){
+                if(j != i){
+                  missing['Player'] = draft_07[i]['player'];
+                  missing['PPG'] = 0;
+                  missing['PER'] = 0;
+                  missing['eFG%'] = 0;
+                  missing['Year'] = draft_07[i]['Year'];
+                  rookie_stats_07.splice(i, 0, missing)
+                }
+              }
+            });
+          });
+
+          var missing = {}
+          draft_11.forEach(function(c,j){
+            rookie_stats_11.forEach(function(d,i){
+              if(c['player'] === d['Player']){
+                if(j != i){
+                  missing['Player'] = draft_11[i]['player'];
+                  missing['PPG'] = 0;
+                  missing['PER'] = 0;
+                  missing['eFG%'] = 0;
+                  missing['Year'] = draft_11[i]['Year'];
+                  rookie_stats_11.splice(i, 0, missing)
+                }
+              }
+            });
+          });
+
+          var missing = {}
+          draft_13.forEach(function(c,j){
+            rookie_stats_13.forEach(function(d,i){
+              if(c['player'] === d['Player']){
+                if(j != i){
+                  missing['Player'] = draft_13[i]['player'];
+                  missing['PPG'] = 0;
+                  missing['PER'] = 0;
+                  missing['eFG%'] = 0;
+                  missing['Year'] = draft_13[i]['Year'];
+                  rookie_stats_13.splice(i, 0, missing)
+                }
+              }
+            });
+          });
+
+          var missing = {}
+          draft_14.forEach(function(c,j){
+            rookie_stats_14.forEach(function(d,i){
+              if(c['player'] === d['Player']){
+                if(j != i){
+                  missing['Player'] = draft_14[i]['player'];
+                  missing['PPG'] = 0;
+                  missing['PER'] = 0;
+                  missing['eFG%'] = 0;
+                  missing['Year'] = draft_14[i]['Year'];
+                  rookie_stats_14.splice(i, 0, missing)
+                }
+              }
+            });
+          });
+
+          console.log(draft_07);
+          console.log(rookie_stats_07);
 
           function show_pts(year){
             let index = 1;
