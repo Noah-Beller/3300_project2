@@ -95,8 +95,6 @@
           draft_17 = data[2].filter(d => d['year'] === "2017" && d['pick'] < 11)
           draft_18 = data[2].filter(d => d['year'] === "2018" && d['pick'] < 11)
 
-          console.log(top_ten_picks);
-          // console.log(top_ten_stats);
 
           console.log(top_ten_picks);
           console.log(top_ten_stats);
@@ -318,7 +316,7 @@
 
 
         // -------------------------------- Overview -------------------------------
-        
+
           let overallDrafts = d3.select("svg#cumulative");
           let overall_xscale = d3.scaleLinear().domain([2000,2020]).range([0,1150]);
           let overall_xticks = []
@@ -356,13 +354,13 @@
 
           let rookie_classes = [rookie_stats_03,rookie_stats_04,rookie_stats_05,rookie_stats_06,rookie_stats_07,rookie_stats_08,rookie_stats_09,rookie_stats_10,rookie_stats_11,rookie_stats_12,rookie_stats_13,rookie_stats_14,rookie_stats_15,rookie_stats_16];
 
-          // draft_07.forEach(function(c,j){
-          //   rookie_stats_07.forEach(function(d,i){
-          //     if(c['Player']){
-          //
-          //     }
-          //   });
-          // });
+          draft_07.forEach(function(c,j){
+            rookie_stats_07.forEach(function(d,i){
+              if(c['Player']){
+
+              }
+            });
+          });
 
           function show_pts(year){
             let index = 1;
