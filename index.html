@@ -33,7 +33,7 @@
     <script>
       Promise.all([
         d3.csv("data/player_data.csv"),
-        d3.csv("data/Seasons_Stats.csv"),
+        d3.csv("data/Seasons_States.csv"),
         d3.tsv("data/NBA_Draft_1980_2017.tsv")
       ]).then(function(data){
           //FILTERING OF DATA
@@ -46,6 +46,7 @@
           top_ten_picks[0]['player'] = 'James, LeBron'
           top_ten_picks[8]['player'] = 'Sweetney, Mike'
           top_ten_picks[46]['player'] = 'Jianlian, Yi'
+          top_ten_picks[139]['player'] = 'Poeltl, Jakob'
 
           //Lebron and Michael's names were input incorrectly
 
@@ -100,7 +101,7 @@
           // console.log(top_ten_picks);
           // console.log(top_ten_stats);
 
-          // console.log(top_ten_picks);
+          console.log(top_ten_picks);
           // console.log(top_ten_stats);
 
           first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 1);
@@ -393,17 +394,18 @@
             });
           });
 
-          var missing = {}
-          draft_07.forEach(function(c,j){
-            rookie_stats_07.forEach(function(d,i){
+
+          draft_09.forEach(function(c,j){
+            rookie_stats_09.forEach(function(d,i){
               if(c['player'] === d['Player']){
                 if(j != i){
-                  missing['Player'] = draft_07[i]['player'];
+                  var missing = {}
+                  missing['Player'] = draft_09[i]['player'];
                   missing['PPG'] = 0;
                   missing['PER'] = 0;
                   missing['eFG%'] = 0;
-                  missing['Year'] = draft_07[i]['Year'];
-                  rookie_stats_07.splice(i, 0, missing)
+                  missing['Year'] = draft_09[i]['Year'];
+                  rookie_stats_09.splice(i, 0, missing)
                 }
               }
             });
@@ -457,7 +459,23 @@
             });
           });
 
-          console.log(draft_07);
+          var missing = {}
+          draft_16.forEach(function(c,j){
+            rookie_stats_16.forEach(function(d,i){
+              if(c['player'] === d['Player']){
+                if(j != i){
+                  missing['Player'] = draft_16[i]['player'];
+                  missing['PPG'] = 0;
+                  missing['PER'] = 0;
+                  missing['eFG%'] = 0;
+                  missing['Year'] = draft_16[i]['Year'];
+                  rookie_stats_16.splice(i, 0, missing)
+                }
+              }
+            });
+          });
+
+          console.log(draft_09);
           console.log(rookie_stats_07);
 
           function show_pts(year){
