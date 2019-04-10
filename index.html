@@ -38,7 +38,7 @@
       ]).then(function(data){
           //FILTERING OF DATA
 
-        console.log(data);
+        // console.log(data);
 
           // console.log(season_stats);
           let top_ten_picks = data[2].filter(d => d['year'] > "2002" && d['pick'] < 11)
@@ -75,7 +75,7 @@
                 top_ten_stats.push(d);
               };
             });
-            console.log(season_stats);
+            // console.log(season_stats);
           });
 
           draft_03 = data[2].filter(d => d['year'] === "2003" && d['pick'] < 11)
@@ -121,10 +121,12 @@
             top_ten_stats.forEach(function(d,i){
               if (a["player"] === d["Player"]){
                 pick_01_all_stat.push(d);
+                pick_01_cumulative_stats['totalPts'] = pick_01_cumulative_stats['totalPts'] + d['PPG'];
               };
             });
           });
           console.log(pick_01_all_stat);
+          console.log(pick_01_cumulative_stats);
           // function picksData (pickNumber, year){
 
           // }
