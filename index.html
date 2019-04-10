@@ -104,16 +104,16 @@
           console.log(top_ten_picks);
           // console.log(top_ten_stats);
 
-          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 1);
-          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 2);
-          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 3);
-          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 4);
-          fifth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 5);
-          sixth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 6);
-          seventh_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 7);
-          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 8);
-          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 9);
-          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 10);
+          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 1);
+          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 2);
+          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 3);
+          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 4);
+          fifth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 5);
+          sixth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 6);
+          seventh_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 7);
+          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
+          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 9);
+          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
           console.log(first_picks);
 
           pick_01_all_stat =[]
@@ -334,20 +334,21 @@
             });
           });
 
-          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 1);
-          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 2);
-          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 3);
-          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 4);
-          fifth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 5);
-          sixth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 6);
-          seventh_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 7);
-          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 8);
-          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 9);
-          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) <= "2017" && d['pick']== 10);
+          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 1);
+          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 2);
+          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 3);
+          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 4);
+          fifth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 5);
+          sixth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 6);
+          seventh_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 7);
+          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
+          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 9);
+          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
           console.log(first_picks);
 
           function cumulativeStats(player){
             player_stats = {};
+            player_stats['Player'] = player;
             player_stats['years_in_league'] = 0;
             player_stats['PPG_total']= 0;
             player_stats['PER']=0;
