@@ -329,44 +329,168 @@
           })
           return pick_players;
         };
-        console.log(getPlayers(first_picks));
+ 
+        first_pick_players = getPlayers(first_picks);
+        second_pick_players  = getPlayers(second_picks);
+        third_pick_players = getPlayers(third_picks);
+        fourth_pick_players = getPlayers(fourth_picks);
+        fifth_pick_players = getPlayers(fifth_picks);
+        sixth_pick_players = getPlayers(sixth_picks);
+        seventh_pick_players = getPlayers(seventh_picks);
+        eighth_pick_players = getPlayers(eighth_picks);
+        ninth_pick_players = getPlayers(ninth_picks);
+        tenth_pick_players = getPlayers(tenth_picks);
+        console.log(first_pick_players);
 
-      
-          var first_pick_players = [];
-          first_picks.forEach(function(d,i){
-            if (!first_pick_players.includes(d["player"])){
-              first_pick_players.push(d["player"]);
+        function cumulativeStats(player){
+          player_stats = {};
+          player_stats['Player'] = player;
+          player_stats['years_in_league'] = 0;
+          player_stats['PPG_total']= 0;
+          player_stats['PER']=0;
+          player_stats['eFG%']=0;
+          top_ten_stats.forEach(function(d,i){
+            if (d["Player"]=== player ){
+              player_stats['years_in_league'] = player_stats['years_in_league'] + 1;
+              player_stats['PPG_total'] = player_stats['PPG_total'] +  d["PPG"];
+              player_stats['PER'] = player_stats['PER'] + Number(d['PER']);
+              player_stats['eFG%'] = player_stats['eFG%'] +  Number(d['eFG%']);
             }
           });
-          console.log(first_pick_players);
-          first_pick_statistics = []
-          first_pick_players.forEach(function(e){
-            first_pick_statistics.push(cumulativeStats(e));
-          });
-          console.log(first_pick_statistics);
-
-          function cumulativeStats(player){
-            player_stats = {};
-            player_stats['Player'] = player;
-            player_stats['years_in_league'] = 0;
-            player_stats['PPG_total']= 0;
-            player_stats['PER']=0;
-            player_stats['eFG%']=0;
-            top_ten_stats.forEach(function(d,i){
-              if (d["Player"]=== player ){
-                player_stats['years_in_league'] = player_stats['years_in_league'] + 1;
-                player_stats['PPG_total'] = player_stats['PPG_total'] +  d["PPG"];
-                player_stats['PER'] = player_stats['PER'] + Number(d['PER']);
-                player_stats['eFG%'] = player_stats['eFG%'] +  Number(d['eFG%']);
-              }
-            });
+          if (player_stats['years_in_league'] == 0){
+            player_stats['PPG_total_average'] = 0;
+            player_stats['PER_average'] = 0;
+            player_stats['eFG%_average'] = 0;
+          } else{
             player_stats['PPG_total_average'] = player_stats['PPG_total'] / player_stats['years_in_league']
             player_stats['PER_average'] = player_stats['PER'] / player_stats['years_in_league']
             player_stats['eFG%_average'] = player_stats['eFG%'] / player_stats['years_in_league']
-            return(player_stats);
-          };
+          }
+          return(player_stats);
+        };
 
-          console.log(cumulativeStats('LeBron James'));
+        first_pick_statistics = []
+        first_pick_players.forEach(function(e){
+          first_pick_statistics.push(cumulativeStats(e));
+        });
+        console.log(first_pick_statistics);
+
+        second_pick_statistics = []
+        second_pick_players.forEach(function(e){
+          second_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(second_pick_statistics);
+
+        third_pick_statistics = []
+        third_pick_players.forEach(function(e){
+          third_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(third_pick_statistics);
+
+        fourth_pick_statistics = []
+        fourth_pick_players.forEach(function(e){
+          fourth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(fourth_pick_statistics);
+
+        fifth_pick_statistics = []
+        fifth_pick_players.forEach(function(e){
+          fifth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(fifth_pick_statistics);
+
+        sixth_pick_statistics = []
+        sixth_pick_players.forEach(function(e){
+          sixth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(sixth_pick_statistics);
+
+        seventh_pick_statistics = []
+        seventh_pick_players.forEach(function(e){
+          seventh_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(seventh_pick_statistics);
+
+        eighth_pick_statistics = []
+        eighth_pick_players.forEach(function(e){
+          eighth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(eighth_pick_statistics);
+
+        ninth_pick_statistics = []
+        ninth_pick_players.forEach(function(e){
+          ninth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(ninth_pick_statistics);
+
+        tenth_pick_statistics = []
+        tenth_pick_players.forEach(function(e){
+          tenth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(tenth_pick_statistics);
+
+        first_pick_cumulative_stats2 = {};
+        first_pick_cumulative_stats2['totalPts'] = 0; 
+        first_pick_cumulative_stats2['totaleFG%'] = 0;
+        first_pick_cumulative_stats2['totalPER'] = 0;
+        first_pick_cumulative_stats2['highestPts'] = 0;
+        first_pick_cumulative_stats2['highesteFG%'] = 0;
+        first_pick_cumulative_stats2['highestPER'] = 0;
+
+        function obtainCumulativeStats(pick_stats, cumulative_stats){
+          pick_stats.forEach(function(d,i){
+            cumulative_stats['totalPts'] = cumulative_stats['totalPts'] + d["PPG_total_average"];
+          if (d["PPG_total_average"] > cumulative_stats['highestPts']){
+            cumulative_stats['highestPts'] = d["PPG_total_average"];
+            cumulative_stats['highestPts_player'] = d["Player"]; 
+          };
+          cumulative_stats['totalPER'] = cumulative_stats['totalPER'] + d["PER_average"];
+          if (d["PER_average"] > cumulative_stats['highestPER']){
+            cumulative_stats['highestPER'] = d["PER_average"];
+            cumulative_stats['highestPER_Player'] = d["Player"]; 
+          };
+          cumulative_stats['totaleFG%'] = cumulative_stats['totaleFG%'] + d["eFG%_average"];
+          if (d["eFG%_average"] > cumulative_stats['highesteFG%']){
+            cumulative_stats['highesteFG%'] = d["eFG%_average"];
+            cumulative_stats['highesteFG%_player'] = d["Player"]; 
+          };
+        cumulative_stats['Draft_Pts_average'] = cumulative_stats['totalPts'] / 14
+        cumulative_stats['Draft_PER_average'] = cumulative_stats['totalPER'] / 14
+        cumulative_stats['Draft_eFG%_average'] = cumulative_stats['totaleFG%'] / 14
+          });
+        return cumulative_stats
+        };
+        console.log(obtainCumulativeStats(first_pick_statistics, first_pick_cumulative_stats2));
+
+        first_pick_cumulative_stats = {};
+        first_pick_cumulative_stats['totalPts'] = 0; 
+        first_pick_cumulative_stats['totaleFG%'] = 0;
+        first_pick_cumulative_stats['totalPER'] = 0;
+        first_pick_cumulative_stats['highestPts'] = 0;
+        first_pick_cumulative_stats['highesteFG%'] = 0;
+        first_pick_cumulative_stats['highestPER'] = 0;
+        // first_pick_statistics.forEach(function(d,i){
+        //   first_pick_cumulative_stats['totalPts'] = first_pick_cumulative_stats['totalPts'] + d["PPG_total_average"];
+        //   if (d["PPG_total_average"] > first_pick_cumulative_stats['highestPts']){
+        //     first_pick_cumulative_stats['highestPts'] = d["PPG_total_average"];
+        //     first_pick_cumulative_stats['highestPts_player'] = d["Player"]; 
+        //   };
+        //   first_pick_cumulative_stats['totalPER'] = first_pick_cumulative_stats['totalPER'] + d["PER_average"];
+        //   if (d["PER_average"] > first_pick_cumulative_stats['highestPER']){
+        //     first_pick_cumulative_stats['highestPER'] = d["PER_average"];
+        //     first_pick_cumulative_stats['highestPER_Player'] = d["Player"]; 
+        //   };
+        //   first_pick_cumulative_stats['totaleFG%'] = first_pick_cumulative_stats['totaleFG%'] + d["eFG%_average"];
+        //   if (d["eFG%_average"] > first_pick_cumulative_stats['highesteFG%']){
+        //     first_pick_cumulative_stats['highesteFG%'] = d["eFG%_average"];
+        //     first_pick_cumulative_stats['highesteFG%_player'] = d["Player"]; 
+        //   };
+        // first_pick_cumulative_stats['Draft_Pts_average'] = first_pick_cumulative_stats['totalPts'] / 14
+        // first_pick_cumulative_stats['Draft_PER_average'] = first_pick_cumulative_stats['totalPER'] / 14
+        // first_pick_cumulative_stats['Draft_eFG%_average'] = first_pick_cumulative_stats['totaleFG%'] / 14
+
+        // });
+        console.log(first_pick_cumulative_stats);
 
 
           // pick_01_all_stat =[]
