@@ -346,6 +346,16 @@
           tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
           console.log(first_picks);
 
+          var first_pick_players = [];
+          first_picks.forEach(function(d,i){
+            if (!first_pick_players.includes(d["player"])){
+              first_pick_players.push(d["player"]);
+            }
+          });
+          console.log(first_pick_players);
+
+          
+
           function cumulativeStats(player){
             player_stats = {};
             player_stats['Player'] = player;
@@ -369,30 +379,6 @@
 
           console.log(cumulativeStats('LeBron James'));
 
-
-
-          var first_pick_players = [];
-          first_picks.forEach(function(d,i){
-            if (!first_pick_players.includes(d["player"])){
-              first_pick_players.push(d["player"]);
-            }
-          });
-          console.log(first_pick_players);
-
-          lebron_stats = {};
-          lebron_stats['PPG_total'] = 0;
-          lebron_stats['years_in_league'] = 0;
-          lebron_stats['PER'] = 0;
-          lebron_stats['eFG%'] = 0;
-          top_ten_stats.forEach(function(d,i){
-            if (d["Player"] === "LeBron James"){
-              lebron_stats['years_in_league'] = lebron_stats['years_in_league'] + 1;
-              lebron_stats['PPG_total'] = lebron_stats['PPG_total'] +  d["PPG"];
-              lebron_stats['PER'] = lebron_stats['PER'] + Number(d['PER']);
-              lebron_stats['eFG%'] = lebron_stats['eFG%'] +  Number(d['eFG%']);
-            }
-          });
-          console.log(lebron_stats);
 
           // pick_01_all_stat =[]
           // pick_01_cumulative_stats = {};
