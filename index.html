@@ -102,37 +102,8 @@
           // console.log(top_ten_stats);
 
           console.log(top_ten_picks);
-          // console.log(top_ten_stats);
+          // console.log(top_ten_stats)
 
-          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 1);
-          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 2);
-          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 3);
-          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 4);
-          fifth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 5);
-          sixth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 6);
-          seventh_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 7);
-          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
-          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 9);
-          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
-          console.log(first_picks);
-
-          pick_01_all_stat =[]
-          pick_01_cumulative_stats = {};
-          pick_01_cumulative_stats['totalPts'] = 0;
-          pick_01_cumulative_stats['']
-          first_picks.forEach(function(a,k){
-            top_ten_stats.forEach(function(d,i){
-              if (a["player"] === d["Player"]){
-                pick_01_all_stat.push(d);
-                pick_01_cumulative_stats['totalPts'] = pick_01_cumulative_stats['totalPts'] + d['PPG'];
-              };
-            });
-          });
-          console.log(pick_01_all_stat);
-          console.log(pick_01_cumulative_stats);
-          // function picksData (pickNumber, year){
-
-          // }
           console.log(draft_03);
           console.log(top_ten_stats);
           stats_03 = [];
@@ -341,11 +312,26 @@
           fifth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 5);
           sixth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 6);
           seventh_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 7);
-          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
+          eighth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
           ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 9);
           tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
-          console.log(first_picks);
 
+
+         picks = [first_picks, second_picks, third_picks, fourth_picks, fifth_picks, sixth_picks, seventh_picks, eighth_picks, ninth_picks, tenth_picks];
+        console.log(picks);
+
+        function getPlayers(pickArray){
+          pick_players = [];
+          pickArray.forEach(function(d,i){
+            if (!pick_players.includes(d["player"])){
+              pick_players.push(d["player"])
+            }
+          })
+          return pick_players;
+        };
+        console.log(getPlayers(first_picks));
+
+      
           var first_pick_players = [];
           first_picks.forEach(function(d,i){
             if (!first_pick_players.includes(d["player"])){
@@ -353,8 +339,11 @@
             }
           });
           console.log(first_pick_players);
-
-          
+          first_pick_statistics = []
+          first_pick_players.forEach(function(e){
+            first_pick_statistics.push(cumulativeStats(e));
+          });
+          console.log(first_pick_statistics);
 
           function cumulativeStats(player){
             player_stats = {};
@@ -416,7 +405,7 @@
 
           let overall_yscale = d3.scaleLinear().domain([30,0]).range([0,450]);
 
-          console.log(rookie_stats_03);
+          // console.log(rookie_stats_03);
 
 
         // -------------------------------- PTS -------------------------------
@@ -536,8 +525,8 @@
             });
           });
 
-          console.log(draft_09);
-          console.log(rookie_stats_07);
+          // console.log(draft_09);
+          // console.log(rookie_stats_07);
 
           function show_pts(year){
             let index = 1;
@@ -640,8 +629,8 @@
                 show_per(year);
               });
 
-          console.log(rookie_stats_03);
-          console.log(rookie_classes)
+          // console.log(rookie_stats_03);
+          // console.log(rookie_classes)
 
         // ------------------------ eFG% ----------------------------
 
