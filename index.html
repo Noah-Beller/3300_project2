@@ -670,18 +670,11 @@
             .style("font", "12px times")
             .call(overall_efg_yaxis);
 
-          // overallDrafts_chart.append("circle")
-          //   .attr("r", 4)
-          //   .attr("cx", overall_xscale(1))
-          //   .attr("cy", overall_yscale(0))
-          //   .style("fill", "red");
-
-        function updateCumulative(x,y){
+        function updateCumulative(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
             temp_average = Math.round(d[x]*10)/10
             temp_highest = Math.round(d[y]*10)/10
-            console.log(temp_average);
-            overallDrafts_chart.append('rect')
+            overallDraft_eFG.append('rect')
                 .attr("width","30")
                 .attr("height", 500-overall_yscale(d[x]))
                 .attr("x", overall_xscale(d['pick'])-30)
@@ -689,11 +682,21 @@
                 .attr("stroke", "black")
                 .style("fill", "blue")
                 .attr("class", "average")
-            overallDrafts_chart.append("text")
+                .on("mouseover",function(){
+                  d3.select(this) 
+                    .style("fill","red")
+
+                })
+                .on("mouseout", function(){
+                  d3.select(this)
+                    .style("fill", "blue");
+                })
+
+            overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick'])-30)
              .attr("y", overall_yscale(d[x])-10)
              .text(temp_average.toString());
-            overallDrafts_chart.append('rect')
+            overallDraft_eFG.append('rect')
               .attr("width", "30")
               .attr("height", 500-overall_yscale(d[y]))
               .attr("x", overall_xscale(d['pick']))
@@ -701,14 +704,29 @@
               .attr("stroke", "black")
               .style("fill", "yellow")
               .attr("class", "highest")
-              overallDrafts_chart.append("text")
+              .on("mouseover",function(){
+                  d3.select(this) 
+                    .style("fill","red")
+                  overallDraft_eFG.append("text")
+                    .attr('id', d[z])
+                    .attr("x",overall_xscale(d['pick'])-30)
+                    .attr("y", overall_yscale(d[y])-25)
+                    .text(d[z])
+                })
+                .on("mouseout", function(){
+                  d3.select(this)
+                    .style("fill", "yellow");
+                  d3.select("#"+ d[z]).remove();
+                })
+
+            overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick']))
              .attr("y", overall_yscale(d[y])-10)
              .text(temp_highest.toString());
           });
         };
 
-        function updateCumulative_efg(x,y){
+        function updateCumulative_efg(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
             temp_average = Math.round(d[x]*100)/100
             temp_highest = Math.round(d[y]*100)/100
@@ -721,9 +739,14 @@
               .attr("fill", "blue")
               .attr("class", "average")
               .on("mouseover",function(){
-                d3.select(this)
-                  .attr("fill","red");
+                d3.select(this) 
+                  .style("fill","red")
               })
+
+              .on("mouseout", function(){
+                d3.select(this)
+                  .style("fill", "blue");
+                })
             overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick'])-30)
              .attr("y", overall_eFG_scale(d[x])-10)
@@ -736,6 +759,20 @@
               .attr("stroke", "black")
               .style("fill", "yellow")
               .attr("class", "highest")
+              .on("mouseover",function(){
+                  d3.select(this) 
+                    .style("fill","red")
+                  overallDraft_eFG.append("text")
+                    .attr('id', d[z])
+                    .attr("x",overall_xscale(d['pick'])-30)
+                    .attr("y", overall_eFG_scale(d[y])-30)
+                    .text(d[z])
+                })
+                .on("mouseout", function(){
+                  d3.select(this)
+                    .style("fill", "yellow");
+                  d3.select("#"+ d[z]).remove();
+                })
             overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick']))
              .attr("y", overall_eFG_scale(d[y])-10)
@@ -743,21 +780,21 @@
           });
         };
 
-        updateCumulative('Draft_Pts_average','highestPts');
+        updateCumulative('Draft_Pts_average','highestPts','highestPts_player');
 
         d3.select("#statistic")
           .on('change', function(){
               overallDrafts_chart.selectAll("rect").remove()
-              overallDrafts_chart.selectAll("text").remove()
+              // overallDrafts_chart.selectAll("text").remove()
               overallDraft_eFG.selectAll("rect").remove()
               overallDraft_eFG.selectAll("text").remove()
               temp_statistic = d3.select(this).property('value');
               if (temp_statistic === 'points'){
-                updateCumulative('Draft_Pts_average','highestPts')
+                updateCumulative('Draft_Pts_average','highestPts','highestPts_player')
               } else if (temp_statistic === 'PER'){
-                updateCumulative("Draft_PER_average", 'highestPER')
+                updateCumulative("Draft_PER_average", 'highestPER','highestPER_Player')
               } else {
-                updateCumulative_efg("Draft_eFG%_average", "highesteFG%")
+                updateCumulative_efg("Draft_eFG%_average", "highesteFG%",'highesteFG%_player')
               }
           });
 
