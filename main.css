@@ -12,6 +12,11 @@ h1{
     text-align: center;
 }
 
+h2{
+    text-align: center;
+}
+
+
 #select{
     /* margin-left:75px; */
     margin-bottom:0px;
@@ -29,19 +34,41 @@ p{
 #slider_div_pts{
     margin-left: 70px;
     margin-top: -40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 #slider_div_PER{
     margin-left: 70px;
     margin-top: -40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 #slider_div_eFG{
     margin-left: 70px;
     margin-top: -40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
+
+#checkbox_div_PER{
+    margin-left:70px;
+    margin-bottom: 30px;
+}
+
+#checkbox_div_pts{
+    margin-left:70px;
+    margin-bottom: 30px;
+}
+
+#divcaption{
+    text-align:left;
+    margin-left:0px;
+}
+
+
+#checkbox_div_eFG{
+    margin-left:70px;
+    margin-bottom: 30px;
+}
+
 
   

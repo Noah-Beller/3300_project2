@@ -27,10 +27,25 @@
         </select>
       </div>
 
+
     <svg id = "cumulative" height = "600" width = "1300"></svg>
   
     <!-- <svg id = "pie" height = "500" width = "500" radius = "250"></svg>
     <br> -->
+
+    <h2> 
+        Looking Deeper Into Each Draft Class 
+    </h2>
+    <p>
+      Here, in the next three graphs, you can look into the statistics for each member of each 
+      draft class by their rookie years as well as their cumulative totals. The first graph is analysis by PPG(Points Per Game) Average.
+      The second graph is analysis by average PER. The third graph is analysis by average eFG%. 
+    </p>
+    <p> 
+      For each graph, you can select the year by moving up and down the slider. Currently, the graphs are toggled to display
+      the statistics from the rookie year (orange bars). Checking the checkbox under the graph would change to cumulative years statistics.
+      This is also visible because the bars will be blue.
+    </p>
 
     <svg id = "pts" height = "600" width = "950">
 
@@ -41,7 +56,7 @@
     </div>
 
     <div id = 'checkbox_div_pts'>
-
+      <p id = 'divcaption'> check this box to switch from rookie year statistics to career statistics </p>
     </div>
 
     <svg id = 'per' height = "600" width = "950">
@@ -49,11 +64,11 @@
     </svg>
 
     <div id="slider_div_PER">
-
+      <p id='divcaption'> check this box</p>
     </div>
 
     <div id = 'checkbox_div_PER'>
-
+        <p id = 'divcaption'> check this box to switch from rookie year statistics to career statistics </p>
     </div>
 
     <svg id = 'eFG' height = "600" width = "950">
@@ -65,7 +80,7 @@
     </div>
 
     <div id = 'checkbox_div_eFG'>
-
+        <p id = 'divcaption'> check this box to switch from rookie year statistics to career statistics </p>
     </div>
 
     <script>
