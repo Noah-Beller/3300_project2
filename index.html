@@ -9,14 +9,28 @@
   <body>
 
   <h1> Can Draft Pick Order Predict NBA Success? </h1>
-      <select id = 'statistic'>
+  <p> 
+
+    This first graph that show the average of the statistic from each draft pick number (blue bar) and right next to it who 
+    had the highest statistic (yellow bar) from drafted in that pick number. 
+    This is to compare between draft pick and statistic by looking at the blue bars (average) from left (earliest pick) to the right (latest pick).
+    
+    <br><br>You can select which statistic to look out with this dropdown menu. 
+    You can also see the specific individual player name by mousing over the specific bar. 
+  </p>
+      <div id="select">
+        <select id = 'statistic'>
           <option value = "points" selected = "selected">Points</option>
           <option value = "PER"> PER </option>
           <option value = "eFG%">eFG% </option>
         </select>
-        <br>
+      </div>
 
     <svg id = "cumulative" height = "600" width = "1300"></svg>
+  
+    <!-- <svg id = "pie" height = "500" width = "500"></svg>
+    <br> -->
+
     <svg id = "pts" height = "600" width = "950">
 
     </svg>
@@ -590,6 +604,7 @@
 
         console.log(totalCumulativeStatistics);
 
+<<<<<<< HEAD
         // first_pick_statistics.forEach(function(d,i){
         //   first_pick_cumulative_stats['totalPts'] = first_pick_cumulative_stats['totalPts'] + d["PPG_total_average"];
         //   if (d["PPG_total_average"] > first_pick_cumulative_stats['highestPts']){
@@ -612,9 +627,11 @@
 
         // });
 
+=======
+>>>>>>> fca594d57a1758c25b3a4350d97fc87929d3e793
 
         // -------------------------------- Overview -------------------------------
-
+        // Looking for values for proper Y-axis
           var highestPoints = 0;
           totalCumulativeStatistics.forEach(function(d,i){
             if (d["highestPts"] > highestPoints){
@@ -639,6 +656,8 @@
           });
           console.log(highesteFG);
 
+          // Setting up X and Y Axis
+
           let overallDrafts = d3.select("svg#cumulative");
           let overallDrafts_chart = overallDrafts.append('g')
              .attr('transform', "translate(50,50)")
@@ -652,7 +671,7 @@
           let overall_xaxis = d3.axisBottom().scale(overall_xscale).tickValues(overall_xticks);
           let overall_x_axis = overallDrafts_chart.append("g")
             .attr("transform", "translate(0, 500)")
-            .style("font","12px times")
+            .style("font","20px times")
             .call(overall_xaxis);
 
           let overall_yscale = d3.scaleLinear().domain([30,0]).range([0,500]);
@@ -671,7 +690,8 @@
 
           let overall_efg_xaxis = overallDraft_eFG.append("g")
             .attr("transform", "translate(0, 500)")
-            .style("font","12px times")
+            .style("font","20px times")
+            // .style("font-weight","bold")
             .call(overall_xaxis);
 
           let overall_eFG_scale = d3.scaleLinear().domain([1,0]).range([0,500]);
@@ -684,6 +704,8 @@
             .attr("transform", "translate(0,0)")
             .style("font", "12px times")
             .call(overall_efg_yaxis);
+
+        //Function that updates the graph if PER or Pts was selected, 
 
         function updateCumulative(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
@@ -706,7 +728,6 @@
                   d3.select(this)
                     .style("fill", "blue");
                 })
-
             overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick'])-30)
              .attr("y", overall_yscale(d[x])-10)
@@ -733,13 +754,15 @@
                     .style("fill", "yellow");
                   d3.select("#"+ d[z]).remove();
                 })
-
             overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick']))
              .attr("y", overall_yscale(d[y])-10)
              .text(temp_highest.toString());
           });
         };
+
+
+        //Function that updates the graph if eFG selected, 
 
         function updateCumulative_efg(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
@@ -795,12 +818,12 @@
           });
         };
 
+        //initalizes a graph
         updateCumulative('Draft_Pts_average','highestPts','highestPts_player');
 
         d3.select("#statistic")
           .on('change', function(){
               overallDrafts_chart.selectAll("rect").remove()
-              // overallDrafts_chart.selectAll("text").remove()
               overallDraft_eFG.selectAll("rect").remove()
               overallDraft_eFG.selectAll("text").remove()
               temp_statistic = d3.select(this).property('value');
@@ -813,6 +836,7 @@
               }
           });
 
+<<<<<<< HEAD
         // var bar = svg.selectAll("")
 
           // totalCumulativeStatistics.forEach(function(d,i){
@@ -849,6 +873,8 @@
           //         .text(d['Player']);
           //     index++
 
+=======
+>>>>>>> fca594d57a1758c25b3a4350d97fc87929d3e793
 
 
         // -------------------------------- PTS -------------------------------
@@ -979,7 +1005,7 @@
                 .attr("transform","translate(80,10)")
                 .call(y_axis_pts);
 
-              rookie_class.forEach(function(d,i){
+            rookie_class.forEach(function(d,i){
               pts_chart.append('rect')
                   .attr("width", "20")
                   .attr("height", 500 - pts_scale(d['PPG']))
@@ -994,7 +1020,8 @@
                   .attr("y", 530)
                   .attr("font-family","Apple Ligothic")
                   .attr("font-size", "12px")
-                  .text(d['Player']);
+                  .text(d['Player'])
+
               index++
             });
           }
