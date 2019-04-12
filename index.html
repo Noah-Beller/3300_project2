@@ -4,9 +4,19 @@
     <meta charset="utf-8">
     <title>Project 2</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
   </head>
   <body>
-    <svg id = "cumulative" height = "500" width = "1200"></svg>
+
+  <h1> Can Draft Pick Order Predict NBA Success? </h1>
+      <select id = 'statistic'>
+          <option value = "points" selected = "selected">Points</option>
+          <option value = "PER"> PER </option>
+          <option value = "eFG%">eFG% </option>
+        </select>
+        <br>
+
+    <svg id = "cumulative" height = "600" width = "1300"></svg>
     <svg id = "pts" height = "600" width = "950">
 
     </svg>
@@ -34,6 +44,7 @@
     <div id= "slider_div_eFG">
 
     </div>
+
     <script>
       Promise.all([
         d3.csv("data/player_data.csv"),
@@ -106,37 +117,8 @@
           // console.log(top_ten_stats);
 
           console.log(top_ten_picks);
-          // console.log(top_ten_stats);
+          // console.log(top_ten_stats)
 
-          first_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 1);
-          second_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 2);
-          third_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 3);
-          fourth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 4);
-          fifth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 5);
-          sixth_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 6);
-          seventh_picks =  data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 7);
-          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
-          ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 9);
-          tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
-          console.log(first_picks);
-
-          pick_01_all_stat =[]
-          pick_01_cumulative_stats = {};
-          pick_01_cumulative_stats['totalPts'] = 0;
-          pick_01_cumulative_stats['']
-          first_picks.forEach(function(a,k){
-            top_ten_stats.forEach(function(d,i){
-              if (a["player"] === d["Player"]){
-                pick_01_all_stat.push(d);
-                pick_01_cumulative_stats['totalPts'] = pick_01_cumulative_stats['totalPts'] + d['PPG'];
-              };
-            });
-          });
-          console.log(pick_01_all_stat);
-          console.log(pick_01_cumulative_stats);
-          // function picksData (pickNumber, year){
-
-          // }
           console.log(draft_03);
           console.log(top_ten_stats);
           stats_03 = [];
@@ -345,96 +327,520 @@
           fifth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 5);
           sixth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 6);
           seventh_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 7);
-          eigth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
+          eighth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 8);
           ninth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 9);
           tenth_picks = data[2].filter(d => Number(d['year']) >= "2003" && Number(d['year']) < "2017" && d['pick']== 10);
-          console.log(first_picks);
 
-          function cumulativeStats(player){
-            player_stats = {};
-            player_stats['Player'] = player;
-            player_stats['years_in_league'] = 0;
-            player_stats['PPG_total']= 0;
-            player_stats['PER']=0;
-            player_stats['eFG%']=0;
-            top_ten_stats.forEach(function(d,i){
-              if (d["Player"]=== player ){
-                player_stats['years_in_league'] = player_stats['years_in_league'] + 1;
-                player_stats['PPG_total'] = player_stats['PPG_total'] +  d["PPG"];
-                player_stats['PER'] = player_stats['PER'] + Number(d['PER']);
-                player_stats['eFG%'] = player_stats['eFG%'] +  Number(d['eFG%']);
-              }
-            });
+
+         picks = [first_picks, second_picks, third_picks, fourth_picks, fifth_picks, sixth_picks, seventh_picks, eighth_picks, ninth_picks, tenth_picks];
+        console.log(picks);
+
+        function getPlayers(pickArray){
+          pick_players = [];
+          pickArray.forEach(function(d,i){
+            if (!pick_players.includes(d["player"])){
+              pick_players.push(d["player"])
+            }
+          })
+          return pick_players;
+        };
+ 
+        first_pick_players = getPlayers(first_picks);
+        second_pick_players  = getPlayers(second_picks);
+        third_pick_players = getPlayers(third_picks);
+        fourth_pick_players = getPlayers(fourth_picks);
+        fifth_pick_players = getPlayers(fifth_picks);
+        sixth_pick_players = getPlayers(sixth_picks);
+        seventh_pick_players = getPlayers(seventh_picks);
+        eighth_pick_players = getPlayers(eighth_picks);
+        ninth_pick_players = getPlayers(ninth_picks);
+        tenth_pick_players = getPlayers(tenth_picks);
+        console.log(first_pick_players);
+
+        function cumulativeStats(player){
+          player_stats = {};
+          player_stats['Player'] = player;
+          player_stats['years_in_league'] = 0;
+          player_stats['PPG_total']= 0;
+          player_stats['PER']=0;
+          player_stats['eFG%']=0;
+          top_ten_stats.forEach(function(d,i){
+            if (d["Player"]=== player ){
+              player_stats['years_in_league'] = player_stats['years_in_league'] + 1;
+              player_stats['PPG_total'] = player_stats['PPG_total'] +  d["PPG"];
+              player_stats['PER'] = player_stats['PER'] + Number(d['PER']);
+              player_stats['eFG%'] = player_stats['eFG%'] +  Number(d['eFG%']);
+            }
+          });
+          if (player_stats['years_in_league'] == 0){
+            player_stats['PPG_total_average'] = 0;
+            player_stats['PER_average'] = 0;
+            player_stats['eFG%_average'] = 0;
+          } else{
             player_stats['PPG_total_average'] = player_stats['PPG_total'] / player_stats['years_in_league']
             player_stats['PER_average'] = player_stats['PER'] / player_stats['years_in_league']
             player_stats['eFG%_average'] = player_stats['eFG%'] / player_stats['years_in_league']
-            return(player_stats);
+          }
+          return(player_stats);
+        };
+
+        first_pick_statistics = []
+        first_pick_players.forEach(function(e){
+          first_pick_statistics.push(cumulativeStats(e));
+        });
+        console.log(first_pick_statistics);
+
+        second_pick_statistics = []
+        second_pick_players.forEach(function(e){
+          second_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(second_pick_statistics);
+
+        third_pick_statistics = []
+        third_pick_players.forEach(function(e){
+          third_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(third_pick_statistics);
+
+        fourth_pick_statistics = []
+        fourth_pick_players.forEach(function(e){
+          fourth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(fourth_pick_statistics);
+
+        fifth_pick_statistics = []
+        fifth_pick_players.forEach(function(e){
+          fifth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(fifth_pick_statistics);
+
+        sixth_pick_statistics = []
+        sixth_pick_players.forEach(function(e){
+          sixth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(sixth_pick_statistics);
+
+        seventh_pick_statistics = []
+        seventh_pick_players.forEach(function(e){
+          seventh_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(seventh_pick_statistics);
+
+        eighth_pick_statistics = []
+        eighth_pick_players.forEach(function(e){
+          eighth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(eighth_pick_statistics);
+
+        ninth_pick_statistics = []
+        ninth_pick_players.forEach(function(e){
+          ninth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(ninth_pick_statistics);
+
+        tenth_pick_statistics = []
+        tenth_pick_players.forEach(function(e){
+          tenth_pick_statistics.push(cumulativeStats(e));
+        });
+        // console.log(tenth_pick_statistics);
+
+        first_pick_cumulative_stats2 = {};
+        first_pick_cumulative_stats2['totalPts'] = 0; 
+        first_pick_cumulative_stats2['totaleFG%'] = 0;
+        first_pick_cumulative_stats2['totalPER'] = 0;
+        first_pick_cumulative_stats2['highestPts'] = 0;
+        first_pick_cumulative_stats2['highesteFG%'] = 0;
+        first_pick_cumulative_stats2['highestPER'] = 0;
+
+        function obtainCumulativeStats(pick_stats, cumulative_stats){
+          pick_stats.forEach(function(d,i){
+            cumulative_stats['totalPts'] = cumulative_stats['totalPts'] + d["PPG_total_average"];
+          if (d["PPG_total_average"] > cumulative_stats['highestPts']){
+            cumulative_stats['highestPts'] = d["PPG_total_average"];
+            cumulative_stats['highestPts_player'] = d["Player"]; 
           };
-
-          console.log(cumulativeStats('LeBron James'));
-
-
-
-          var first_pick_players = [];
-          first_picks.forEach(function(d,i){
-            if (!first_pick_players.includes(d["player"])){
-              first_pick_players.push(d["player"]);
-            }
+          cumulative_stats['totalPER'] = cumulative_stats['totalPER'] + d["PER_average"];
+          if (d["PER_average"] > cumulative_stats['highestPER']){
+            cumulative_stats['highestPER'] = d["PER_average"];
+            cumulative_stats['highestPER_Player'] = d["Player"]; 
+          };
+          cumulative_stats['totaleFG%'] = cumulative_stats['totaleFG%'] + d["eFG%_average"];
+          if (d["eFG%_average"] > cumulative_stats['highesteFG%']){
+            cumulative_stats['highesteFG%'] = d["eFG%_average"];
+            cumulative_stats['highesteFG%_player'] = d["Player"]; 
+          };
+        cumulative_stats['Draft_Pts_average'] = cumulative_stats['totalPts'] / 14
+        cumulative_stats['Draft_PER_average'] = cumulative_stats['totalPER'] / 14
+        cumulative_stats['Draft_eFG%_average'] = cumulative_stats['totaleFG%'] / 14
           });
-          console.log(first_pick_players);
+        return cumulative_stats
+        };
 
-          lebron_stats = {};
-          lebron_stats['PPG_total'] = 0;
-          lebron_stats['years_in_league'] = 0;
-          lebron_stats['PER'] = 0;
-          lebron_stats['eFG%'] = 0;
-          top_ten_stats.forEach(function(d,i){
-            if (d["Player"] === "LeBron James"){
-              lebron_stats['years_in_league'] = lebron_stats['years_in_league'] + 1;
-              lebron_stats['PPG_total'] = lebron_stats['PPG_total'] +  d["PPG"];
-              lebron_stats['PER'] = lebron_stats['PER'] + Number(d['PER']);
-              lebron_stats['eFG%'] = lebron_stats['eFG%'] +  Number(d['eFG%']);
-            }
-          });
-          console.log(lebron_stats);
+        first_pick_cumulative_stats = {};
+        first_pick_cumulative_stats['pick'] = 1
+        first_pick_cumulative_stats['totalPts'] = 0; 
+        first_pick_cumulative_stats['totaleFG%'] = 0;
+        first_pick_cumulative_stats['totalPER'] = 0;
+        first_pick_cumulative_stats['highestPts'] = 0;
+        first_pick_cumulative_stats['highesteFG%'] = 0;
+        first_pick_cumulative_stats['highestPER'] = 0;
 
-          // pick_01_all_stat =[]
-          // pick_01_cumulative_stats = {};
-          // pick_01_cumulative_stats['totalPts'] = 0;
-          // pick_01_cumulative_stats['']
-          // first_picks.forEach(function(a,k){
-          //   top_ten_stats.forEach(function(d,i){
-          //     if (a["player"] === d["Player"]){
-          //       pick_01_all_stat.push(d);
-          //       pick_01_cumulative_stats['totalPts'] = pick_01_cumulative_stats['totalPts'] + d['PPG'];
-          //     };
-          //   });
-          // });
-          // console.log(pick_01_all_stat);
-          // console.log(pick_01_cumulative_stats);
+        second_pick_cumulative_stats = {};
+        second_pick_cumulative_stats['pick'] = 2
+        second_pick_cumulative_stats['totalPts'] = 0; 
+        second_pick_cumulative_stats['totaleFG%'] = 0;
+        second_pick_cumulative_stats['totalPER'] = 0;
+        second_pick_cumulative_stats['highestPts'] = 0;
+        second_pick_cumulative_stats['highesteFG%'] = 0;
+        second_pick_cumulative_stats['highestPER'] = 0;
+
+        third_pick_cumulative_stats = {};
+        third_pick_cumulative_stats['pick'] = 3
+        third_pick_cumulative_stats['totalPts'] = 0; 
+        third_pick_cumulative_stats['totaleFG%'] = 0;
+        third_pick_cumulative_stats['totalPER'] = 0;
+        third_pick_cumulative_stats['highestPts'] = 0;
+        third_pick_cumulative_stats['highesteFG%'] = 0;
+        third_pick_cumulative_stats['highestPER'] = 0;
+
+        fourth_pick_cumulative_stats = {};
+        fourth_pick_cumulative_stats['pick'] = 4
+        fourth_pick_cumulative_stats['totalPts'] = 0; 
+        fourth_pick_cumulative_stats['totaleFG%'] = 0;
+        fourth_pick_cumulative_stats['totalPER'] = 0;
+        fourth_pick_cumulative_stats['highestPts'] = 0;
+        fourth_pick_cumulative_stats['highesteFG%'] = 0;
+        fourth_pick_cumulative_stats['highestPER'] = 0;
+
+        fifth_pick_cumulative_stats = {};
+        fifth_pick_cumulative_stats['pick'] = 5
+        fifth_pick_cumulative_stats['totalPts'] = 0; 
+        fifth_pick_cumulative_stats['totaleFG%'] = 0;
+        fifth_pick_cumulative_stats['totalPER'] = 0;
+        fifth_pick_cumulative_stats['highestPts'] = 0;
+        fifth_pick_cumulative_stats['highesteFG%'] = 0;
+        fifth_pick_cumulative_stats['highestPER'] = 0;
+
+        sixth_pick_cumulative_stats = {};
+        sixth_pick_cumulative_stats['pick'] = 6
+        sixth_pick_cumulative_stats['totalPts'] = 0; 
+        sixth_pick_cumulative_stats['totaleFG%'] = 0;
+        sixth_pick_cumulative_stats['totalPER'] = 0;
+        sixth_pick_cumulative_stats['highestPts'] = 0;
+        sixth_pick_cumulative_stats['highesteFG%'] = 0;
+        sixth_pick_cumulative_stats['highestPER'] = 0;
 
 
+        seventh_pick_cumulative_stats = {};
+        seventh_pick_cumulative_stats['pick'] = 7
+        seventh_pick_cumulative_stats['totalPts'] = 0; 
+        seventh_pick_cumulative_stats['totaleFG%'] = 0;
+        seventh_pick_cumulative_stats['totalPER'] = 0;
+        seventh_pick_cumulative_stats['highestPts'] = 0;
+        seventh_pick_cumulative_stats['highesteFG%'] = 0;
+        seventh_pick_cumulative_stats['highestPER'] = 0;
+
+        eighth_pick_cumulative_stats = {};
+        eighth_pick_cumulative_stats['pick'] = 8
+        eighth_pick_cumulative_stats['totalPts'] = 0; 
+        eighth_pick_cumulative_stats['totaleFG%'] = 0;
+        eighth_pick_cumulative_stats['totalPER'] = 0;
+        eighth_pick_cumulative_stats['highestPts'] = 0;
+        eighth_pick_cumulative_stats['highesteFG%'] = 0;
+        eighth_pick_cumulative_stats['highestPER'] = 0;
+
+        ninth_pick_cumulative_stats = {};
+        ninth_pick_cumulative_stats['pick'] = 9
+        ninth_pick_cumulative_stats['totalPts'] = 0; 
+        ninth_pick_cumulative_stats['totaleFG%'] = 0;
+        ninth_pick_cumulative_stats['totalPER'] = 0;
+        ninth_pick_cumulative_stats['highestPts'] = 0;
+        ninth_pick_cumulative_stats['highesteFG%'] = 0;
+        ninth_pick_cumulative_stats['highestPER'] = 0;
+
+        tenth_pick_cumulative_stats = {};
+        tenth_pick_cumulative_stats['pick'] = 10
+        tenth_pick_cumulative_stats['totalPts'] = 0; 
+        tenth_pick_cumulative_stats['totaleFG%'] = 0;
+        tenth_pick_cumulative_stats['totalPER'] = 0;
+        tenth_pick_cumulative_stats['highestPts'] = 0;
+        tenth_pick_cumulative_stats['highesteFG%'] = 0;
+        tenth_pick_cumulative_stats['highestPER'] = 0;
+
+        totalCumulativeStatistics = [];
+        totalCumulativeStatistics.push(obtainCumulativeStats(first_pick_statistics, first_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(second_pick_statistics, second_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(third_pick_statistics, third_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(fourth_pick_statistics, fourth_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(fifth_pick_statistics, fifth_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(sixth_pick_statistics, sixth_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(seventh_pick_statistics, seventh_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(eighth_pick_statistics, eighth_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(ninth_pick_statistics, ninth_pick_cumulative_stats));
+        totalCumulativeStatistics.push(obtainCumulativeStats(tenth_pick_statistics, tenth_pick_cumulative_stats));
 
 
+        console.log(totalCumulativeStatistics);
+
+        // first_pick_statistics.forEach(function(d,i){
+        //   first_pick_cumulative_stats['totalPts'] = first_pick_cumulative_stats['totalPts'] + d["PPG_total_average"];
+        //   if (d["PPG_total_average"] > first_pick_cumulative_stats['highestPts']){
+        //     first_pick_cumulative_stats['highestPts'] = d["PPG_total_average"];
+        //     first_pick_cumulative_stats['highestPts_player'] = d["Player"]; 
+        //   };
+        //   first_pick_cumulative_stats['totalPER'] = first_pick_cumulative_stats['totalPER'] + d["PER_average"];
+        //   if (d["PER_average"] > first_pick_cumulative_stats['highestPER']){
+        //     first_pick_cumulative_stats['highestPER'] = d["PER_average"];
+        //     first_pick_cumulative_stats['highestPER_Player'] = d["Player"]; 
+        //   };
+        //   first_pick_cumulative_stats['totaleFG%'] = first_pick_cumulative_stats['totaleFG%'] + d["eFG%_average"];
+        //   if (d["eFG%_average"] > first_pick_cumulative_stats['highesteFG%']){
+        //     first_pick_cumulative_stats['highesteFG%'] = d["eFG%_average"];
+        //     first_pick_cumulative_stats['highesteFG%_player'] = d["Player"]; 
+        //   };
+        // first_pick_cumulative_stats['Draft_Pts_average'] = first_pick_cumulative_stats['totalPts'] / 14
+        // first_pick_cumulative_stats['Draft_PER_average'] = first_pick_cumulative_stats['totalPER'] / 14
+        // first_pick_cumulative_stats['Draft_eFG%_average'] = first_pick_cumulative_stats['totaleFG%'] / 14
+
+        // });
 
 
         // -------------------------------- Overview -------------------------------
 
+          var highestPoints = 0;
+          totalCumulativeStatistics.forEach(function(d,i){
+            if (d["highestPts"] > highestPoints){
+              highestPoints = d["highestPts"];
+            }
+          });
+          console.log(highestPoints);
+
+          var highestPER = 0;
+          totalCumulativeStatistics.forEach(function(d,i){
+            if (d["highestPER"] > highestPER){
+              highestPER = d["highestPER"];
+            }
+          });
+          console.log(highestPER);
+
+          var highesteFG = 0;
+          totalCumulativeStatistics.forEach(function(d,i){
+            if (d["highesteFG%"] > highesteFG){
+              highesteFG = d["highesteFG%"];
+            }
+          });
+          console.log(highesteFG);
+
           let overallDrafts = d3.select("svg#cumulative");
-          let overall_xscale = d3.scaleLinear().domain([2000,2020]).range([0,1150]);
+          let overallDrafts_chart = overallDrafts.append('g')
+             .attr('transform', "translate(50,50)")
+          let overallDraft_eFG = overallDrafts.append('g')
+              .attr('transform', "translate(50,50)")
+          let overall_xscale = d3.scaleLinear().domain([0,10]).range([0,1150]);
           let overall_xticks = []
-          for (var i=2000; i<=2020; i++){
+          for (var i=0; i<=10; i++){
             overall_xticks.push(i);
           }
           let overall_xaxis = d3.axisBottom().scale(overall_xscale).tickValues(overall_xticks);
-          let overall_x_axis = overallDrafts.append("g")
-            .attr("transform", "translate(25, 450)")
-            .style("font","8px times")
+          let overall_x_axis = overallDrafts_chart.append("g")
+            .attr("transform", "translate(0, 500)")
+            .style("font","12px times")
             .call(overall_xaxis);
 
-          let overall_yscale = d3.scaleLinear().domain([30,0]).range([0,450]);
+          let overall_yscale = d3.scaleLinear().domain([30,0]).range([0,500]);
+          let overall_yticks = []
+          for (var i=0; i<=30; i=i+3){
+            overall_yticks.push(i);
+          }
+          let overall_yaxis = d3.axisLeft()
+            .scale(overall_yscale)
+            .tickValues(overall_yticks)
+            .tickFormat(" ")
+          let overall_y_axis = overallDrafts_chart.append("g")
+            .attr("transform", "translate(0,0)")
+            .style("font", "12px times")
+            .call(overall_yaxis);
+          
+          let overall_efg_xaxis = overallDraft_eFG.append("g")
+            .attr("transform", "translate(0, 500)")
+            .style("font","12px times")
+            .call(overall_xaxis);
 
-          console.log(rookie_stats_03);
+          let overall_eFG_scale = d3.scaleLinear().domain([1,0]).range([0,500]);
+          let overall_eFGticks = []
+          for (var i=0; i<1; i=i+0.1){
+            overall_yticks.push(i);
+          }
+          let overall_efg_yaxis = d3.axisLeft().scale(overall_eFG_scale).tickValues(overall_eFGticks);
+          let overall_efg_axis = overallDraft_eFG.append("g")
+            .attr("transform", "translate(0,0)")
+            .style("font", "12px times")
+            .call(overall_efg_yaxis);
+
+        function updateCumulative(x,y,z){
+          totalCumulativeStatistics.forEach(function(d,i){
+            temp_average = Math.round(d[x]*10)/10
+            temp_highest = Math.round(d[y]*10)/10
+            overallDraft_eFG.append('rect')
+                .attr("width","30")
+                .attr("height", 500-overall_yscale(d[x]))
+                .attr("x", overall_xscale(d['pick'])-30)
+                .attr("y", overall_yscale(d[x]))
+                .attr("stroke", "black")
+                .style("fill", "blue")
+                .attr("class", "average")
+                .on("mouseover",function(){
+                  d3.select(this) 
+                    .style("fill","red")
+
+                })
+                .on("mouseout", function(){
+                  d3.select(this)
+                    .style("fill", "blue");
+                })
+
+            overallDraft_eFG.append("text")
+             .attr("x", overall_xscale(d['pick'])-30)
+             .attr("y", overall_yscale(d[x])-10)
+             .text(temp_average.toString());
+            overallDraft_eFG.append('rect')
+              .attr("width", "30")
+              .attr("height", 500-overall_yscale(d[y]))
+              .attr("x", overall_xscale(d['pick']))
+              .attr("y", overall_yscale(d[y]))
+              .attr("stroke", "black")
+              .style("fill", "yellow")
+              .attr("class", "highest")
+              .on("mouseover",function(){
+                  d3.select(this) 
+                    .style("fill","red")
+                  overallDraft_eFG.append("text")
+                    .attr('id', d[z])
+                    .attr("x",overall_xscale(d['pick'])-30)
+                    .attr("y", overall_yscale(d[y])-25)
+                    .text(d[z])
+                })
+                .on("mouseout", function(){
+                  d3.select(this)
+                    .style("fill", "yellow");
+                  d3.select("#"+ d[z]).remove();
+                })
+
+            overallDraft_eFG.append("text")
+             .attr("x", overall_xscale(d['pick']))
+             .attr("y", overall_yscale(d[y])-10)
+             .text(temp_highest.toString());
+          });
+        };
+
+        function updateCumulative_efg(x,y,z){
+          totalCumulativeStatistics.forEach(function(d,i){
+            temp_average = Math.round(d[x]*100)/100
+            temp_highest = Math.round(d[y]*100)/100
+            overallDraft_eFG.append('rect')
+              .attr("width","30")
+              .attr("height", 500-overall_eFG_scale(d[x]))
+              .attr("x", overall_xscale(d['pick'])-30)
+              .attr("y", overall_eFG_scale(d[x]))
+              .attr("stroke", "black")
+              .attr("fill", "blue")
+              .attr("class", "average")
+              .on("mouseover",function(){
+                d3.select(this) 
+                  .style("fill","red")
+              })
+
+              .on("mouseout", function(){
+                d3.select(this)
+                  .style("fill", "blue");
+                })
+            overallDraft_eFG.append("text")
+             .attr("x", overall_xscale(d['pick'])-30)
+             .attr("y", overall_eFG_scale(d[x])-10)
+             .text(temp_average.toString());
+            overallDraft_eFG.append('rect')
+              .attr("width", "30")
+              .attr("height", 500-overall_eFG_scale(d[y]))
+              .attr("x", overall_xscale(d['pick']))
+              .attr("y", overall_eFG_scale(d[y]))
+              .attr("stroke", "black")
+              .style("fill", "yellow")
+              .attr("class", "highest")
+              .on("mouseover",function(){
+                  d3.select(this) 
+                    .style("fill","red")
+                  overallDraft_eFG.append("text")
+                    .attr('id', d[z])
+                    .attr("x",overall_xscale(d['pick'])-30)
+                    .attr("y", overall_eFG_scale(d[y])-30)
+                    .text(d[z])
+                })
+                .on("mouseout", function(){
+                  d3.select(this)
+                    .style("fill", "yellow");
+                  d3.select("#"+ d[z]).remove();
+                })
+            overallDraft_eFG.append("text")
+             .attr("x", overall_xscale(d['pick']))
+             .attr("y", overall_eFG_scale(d[y])-10)
+             .text(temp_highest.toString());
+          });
+        };
+
+        updateCumulative('Draft_Pts_average','highestPts','highestPts_player');
+
+        d3.select("#statistic")
+          .on('change', function(){
+              overallDrafts_chart.selectAll("rect").remove()
+              // overallDrafts_chart.selectAll("text").remove()
+              overallDraft_eFG.selectAll("rect").remove()
+              overallDraft_eFG.selectAll("text").remove()
+              temp_statistic = d3.select(this).property('value');
+              if (temp_statistic === 'points'){
+                updateCumulative('Draft_Pts_average','highestPts','highestPts_player')
+              } else if (temp_statistic === 'PER'){
+                updateCumulative("Draft_PER_average", 'highestPER','highestPER_Player')
+              } else {
+                updateCumulative_efg("Draft_eFG%_average", "highesteFG%",'highesteFG%_player')
+              }
+          });
+
+        // var bar = svg.selectAll("")
+
+          // totalCumulativeStatistics.forEach(function(d,i){
+          //   overallDrafts_chart.append('rect')
+          //     .attr("width","20")
+          //     .attr("height", 500-overall_yscale(d['Draft_Pts_average']))
+          //     .attr("x", overall_xscale(d['pick'])-20)
+          //     .attr("y", overall_yscale(d['Draft_Pts_average']))
+          //     .attr("stroke", "black")
+          //     .style("fill", "blue")
+          //   overallDrafts_chart.append('rect')
+          //     .attr("width", "20")
+          //     .attr("height", 500-overall_yscale(d['highestPts']))
+          //     .attr("x", overall_xscale(d['pick']))
+          //     .attr("y", overall_yscale(d['highestPts']))
+          //     .attr("stroke", "black")
+          //     .style("fill", "yellow")
+          // });
+
+          // per_chart.append('rect')
+          //         .attr("width", "20")
+          //         .attr("height", 500 - per_scale(d['PER']))
+          //         .attr("x", player_scale(index) - 20)
+          //         .attr("y", 510 - (500 - per_scale(d['PER'])))
+          //         .attr("stroke", "black")
+          //         .style("fill", "orange")
+          //         .attr("transform", "translate(80,0)")
+          //     per.append('text')
+          //         .attr("text-anchor", "middle")
+          //         .attr("x", player_scale(index) + 70)
+          //         .attr("y", 530)
+          //         .attr("font-family","Apple Ligothic")
+          //         .attr("font-size", "12px")
+          //         .text(d['Player']);
+          //     index++
+          
 
 
         // -------------------------------- PTS -------------------------------
@@ -555,8 +961,8 @@
             });
           });
 
-          console.log(draft_09);
-          console.log(rookie_stats_07);
+          // console.log(draft_09);
+          // console.log(rookie_stats_07);
 
           function show_pts(year){
             let index = 1;
@@ -707,8 +1113,8 @@
                 show_per(year);
               });
 
-          console.log(rookie_stats_03);
-          console.log(rookie_classes)
+          // console.log(rookie_stats_03);
+          // console.log(rookie_classes)
 
         // ------------------------ eFG% ----------------------------
 
