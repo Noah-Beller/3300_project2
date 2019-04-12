@@ -10,8 +10,12 @@
 
   <h1> Can Draft Pick Order Predict NBA Success? </h1>
   <p> 
-    This first graph that show the average of the statistic from each draft pick number and right next to it who 
-    had the highest statistic from drafted in that pick number. You can select which statistic to look out with this dropdown menu. 
+
+    This first graph that show the average of the statistic from each draft pick number (blue bar) and right next to it who 
+    had the highest statistic (yellow bar) from drafted in that pick number. 
+    This is to compare between draft pick and statistic by looking at the blue bars (average) from left (earliest pick) to the right (latest pick).
+    
+    <br><br>You can select which statistic to look out with this dropdown menu. 
     You can also see the specific individual player name by mousing over the specific bar. 
   </p>
       <div id="select">
@@ -23,6 +27,9 @@
       </div>
 
     <svg id = "cumulative" height = "600" width = "1300"></svg>
+  
+    <!-- <svg id = "pie" height = "500" width = "500"></svg>
+    <br> -->
 
     <svg id = "pts" height = "600" width = "950">
 
@@ -627,7 +634,7 @@
           let overall_xaxis = d3.axisBottom().scale(overall_xscale).tickValues(overall_xticks);
           let overall_x_axis = overallDrafts_chart.append("g")
             .attr("transform", "translate(0, 500)")
-            .style("font","12px times")
+            .style("font","20px times")
             .call(overall_xaxis);
 
           let overall_yscale = d3.scaleLinear().domain([30,0]).range([0,500]);
@@ -646,7 +653,8 @@
           
           let overall_efg_xaxis = overallDraft_eFG.append("g")
             .attr("transform", "translate(0, 500)")
-            .style("font","12px times")
+            .style("font","20px times")
+            // .style("font-weight","bold")
             .call(overall_xaxis);
 
           let overall_eFG_scale = d3.scaleLinear().domain([1,0]).range([0,500]);
