@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Project 2</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css"/>
   </head>
   <body>
@@ -28,8 +29,8 @@
 
     <svg id = "cumulative" height = "600" width = "1300"></svg>
   
-    <!-- <svg id = "pie" height = "500" width = "500"></svg>
-    <br> -->
+    <svg id = "pie" height = "500" width = "500" radius = "250"></svg>
+    <br>
 
     <svg id = "pts" height = "600" width = "950">
 
@@ -591,6 +592,43 @@
 
 
         console.log(totalCumulativeStatistics);
+
+        // -------------------------------- Pie ----------------------------------
+  
+        var pie = d3.pie()
+        points_pie = []
+        totalCumulativeStatistics.forEach(function(d,i){
+          points_pie.push(d['totalPts'])
+        })
+
+        points_pie_data = pie(points_pie)
+        console.log(points_pie_data);
+
+      
+
+        PER_pie = []
+        totalCumulativeStatistics.forEach(function(d,i){
+          PER_pie.push(d['totalPER'])
+        });
+        console.log(PER_pie);
+
+        eFG_pie = []
+        totalCumulativeStatistics.forEach(function(d,i){
+          eFG_pie.push(d['totaleFG%'])
+        });
+        console.log(eFG_pie);
+
+        var pie_svg= d3.select('svg#pie')
+        var pie_svg_g = pie_svg.append("g").attr("transform", "translate(250,250)");
+
+        var pie_colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+        var pie_arc = d3.arc().innerRadius(0).outerRadius(250);
+
+        var pts_pie_arc = pie_svg_g.selectAll("pie_arc")
+        
+        points_pie.forEach()
+
 
 
         // -------------------------------- Overview -------------------------------
