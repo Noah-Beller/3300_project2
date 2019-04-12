@@ -990,14 +990,25 @@
                 .call(y_axis_pts);
 
             rookie_class.forEach(function(d,i){
+              var pts_label = Math.round(d['PPG'] * 10)/10;
               pts_chart.append('rect')
+                  .attr("id", d['Player'])
                   .attr("width", "20")
                   .attr("height", 500 - pts_scale(d['PPG']))
                   .attr("x", player_scale(index) - 20)
                   .attr("y", 510 - (500 - pts_scale(d['PPG'])))
                   .attr("stroke", "black")
                   .style("fill", "orange")
-                  .attr("transform", "translate(80,0)")
+                  .attr("transform", "translate(80,0)");
+
+
+              pts_chart.append('text')
+                  .attr("font-size", "12px")
+                  .attr("x", player_scale(index) + 60)
+                  .attr("y", 500 - (500 - pts_scale(d['PPG'])))
+                  .text(pts_label)
+
+
               pts.append('text')
                   .attr("text-anchor", "middle")
                   .attr("x", player_scale(index) + 70)
@@ -1027,13 +1038,14 @@
 
 
             career_stats.forEach(function(d,i){
+              var pts_label = Math.round(d['PPG_total_average'] * 10)/10;
               pts_chart.append('rect')
                   .attr("width", "20")
                   .attr("height", 500 - pts_scale(d['PPG_total_average']))
                   .attr("x", player_scale(index) - 20)
                   .attr("y", 510 - (500 - pts_scale(d['PPG_total_average'])))
                   .attr("stroke", "black")
-                  .style("fill", "blue")
+                  .style("fill", "#5c95f2")
                   .attr("transform", "translate(80,0)")
               pts.append('text')
                   .attr("text-anchor", "middle")
@@ -1042,6 +1054,11 @@
                   .attr("font-family","Apple Ligothic")
                   .attr("font-size", "12px")
                   .text(d['Player']);
+              pts_chart.append('text')
+                  .attr("font-size", "12px")
+                  .attr("x", player_scale(index) + 60)
+                  .attr("y", 500 - (500 - pts_scale(d['PPG_total_average'])))
+                  .text(pts_label)
               index++
             });
           }
@@ -1113,6 +1130,13 @@
                 .attr("transform","translate(80,10)")
                 .call(y_axis_per);
               rookie_class.forEach(function(d,i){
+
+              var PER_label = Math.round(d['PER'] * 10)/10;
+
+              if(d['PER'] < 0 ){
+                d['PER'] = 0;
+              };
+              
               per_chart.append('rect')
                   .attr("width", "20")
                   .attr("height", 500 - per_scale(d['PER']))
@@ -1121,6 +1145,11 @@
                   .attr("stroke", "black")
                   .style("fill", "orange")
                   .attr("transform", "translate(80,0)")
+              per_chart.append('text')
+                  .attr("font-size", "12px")
+                  .attr("x", player_scale(index) + 60)
+                  .attr("y", 500 - (500 - pts_scale(d['PER'])))
+                  .text(PER_label);
               per.append('text')
                   .attr("text-anchor", "middle")
                   .attr("x", player_scale(index) + 70)
@@ -1148,14 +1177,20 @@
 
 
             career_stats.forEach(function(d,i){
+              var per_label = Math.round(d['PER_average'] * 10)/10;
               per_chart.append('rect')
                   .attr("width", "20")
                   .attr("height", 500 - per_scale(d['PER_average']))
                   .attr("x", player_scale(index) - 20)
                   .attr("y", 510 - (500 - per_scale(d['PER_average'])))
                   .attr("stroke", "black")
-                  .style("fill", "blue")
-                  .attr("transform", "translate(80,0)")
+                  .style("fill", "#5c95f2")
+                  .attr("transform", "translate(80,0)");
+              per_chart.append('text')
+                  .attr("font-size", "12px")
+                  .attr("x", player_scale(index) + 60)
+                  .attr("y", 500 - (500 - pts_scale(d['PER_average'])))
+                  .text(per_label);
               per.append('text')
                   .attr("text-anchor", "middle")
                   .attr("x", player_scale(index) + 70)
@@ -1236,6 +1271,7 @@
               .attr("transform","translate(80,10)")
               .call(y_axis_eFG);
             rookie_class.forEach(function(d,i){
+            var eFG_label = Math.round(d['eFG%'] * 100)/100;
             eFG_chart.append('rect')
                 .attr("width", "20")
                 .attr("height", 500 - eFG_scale(d['eFG%']))
@@ -1243,7 +1279,12 @@
                 .attr("y", 510 - (500 - eFG_scale(d['eFG%'])))
                 .attr("stroke", "black")
                 .style("fill", "orange")
-                .attr("transform", "translate(80,0)")
+                .attr("transform", "translate(80,0)");
+            eFG_chart.append('text')
+                .attr("font-size", "12px")
+                .attr("x", player_scale(index) + 60)
+                .attr("y", 500 - (500 - eFG_scale(d['eFG%'])))
+                .text(eFG_label);
             eFG.append('text')
                 .attr("text-anchor", "middle")
                 .attr("x", player_scale(index) + 70)
@@ -1271,14 +1312,20 @@
 
 
           career_stats.forEach(function(d,i){
+            var eFG_label = Math.round(d['eFG%_average'] * 100)/100;
             eFG_chart.append('rect')
                 .attr("width", "20")
                 .attr("height", 500 - eFG_scale(d['eFG%_average']))
                 .attr("x", player_scale(index) - 20)
                 .attr("y", 510 - (500 - eFG_scale(d['eFG%_average'])))
                 .attr("stroke", "black")
-                .style("fill", "blue")
-                .attr("transform", "translate(80,0)")
+                .style("fill", "#5c95f2")
+                .attr("transform", "translate(80,0)");
+            eFG_chart.append('text')
+                .attr("font-size", "12px")
+                .attr("x", player_scale(index) + 60)
+                .attr("y", 500 - (500 - eFG_scale(d['eFG%_average'])))
+                .text(eFG_label);
             eFG.append('text')
                 .attr("text-anchor", "middle")
                 .attr("x", player_scale(index) + 70)
