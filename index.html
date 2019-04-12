@@ -24,7 +24,6 @@
 
     <svg id = "cumulative" height = "600" width = "1300"></svg>
 
-
     <svg id = "pts" height = "600" width = "950">
 
     </svg>
@@ -921,7 +920,7 @@
                 .attr("transform","translate(80,10)")
                 .call(y_axis_pts);
 
-              rookie_class.forEach(function(d,i){
+            rookie_class.forEach(function(d,i){
               pts_chart.append('rect')
                   .attr("width", "20")
                   .attr("height", 500 - pts_scale(d['PPG']))
@@ -936,7 +935,8 @@
                   .attr("y", 530)
                   .attr("font-family","Apple Ligothic")
                   .attr("font-size", "12px")
-                  .text(d['Player']);
+                  .text(d['Player'])
+
               index++
             });
           }
