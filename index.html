@@ -10,14 +10,14 @@
   <body>
 
   <h1> Can Draft Pick Order Predict NBA Success? </h1>
-  <p> 
+  <p>
 
-    This first graph that show the average of the statistic from each draft pick number (blue bar) and right next to it who 
-    had the highest statistic (yellow bar) from drafted in that pick number. 
+    This first graph that show the average of the statistic from each draft pick number (blue bar) and right next to it who
+    had the highest statistic (yellow bar) from drafted in that pick number.
     This is to compare between draft pick and statistic by looking at the blue bars (average) from left (earliest pick) to the right (latest pick).
-    
-    <br><br>You can select which statistic to look out with this dropdown menu. 
-    You can also see the specific individual player name by mousing over the specific bar. 
+
+    <br><br>You can select which statistic to look out with this dropdown menu.
+    You can also see the specific individual player name by mousing over the specific bar.
   </p>
       <div id="select">
         <select id = 'statistic'>
@@ -40,6 +40,10 @@
 
     </div>
 
+    <div id = 'checkbox_div_pts'>
+
+    </div>
+
     <svg id = 'per' height = "600" width = "950">
 
     </svg>
@@ -48,11 +52,19 @@
 
     </div>
 
+    <div id = 'checkbox_div_PER'>
+
+    </div>
+
     <svg id = 'eFG' height = "600" width = "950">
 
     </svg>
 
     <div id= "slider_div_eFG">
+
+    </div>
+
+    <div id = 'checkbox_div_eFG'>
 
     </div>
 
@@ -355,7 +367,7 @@
           })
           return pick_players;
         };
- 
+
         first_pick_players = getPlayers(first_picks);
         second_pick_players  = getPlayers(second_picks);
         third_pick_players = getPlayers(third_picks);
@@ -456,7 +468,7 @@
         // console.log(tenth_pick_statistics);
 
         first_pick_cumulative_stats2 = {};
-        first_pick_cumulative_stats2['totalPts'] = 0; 
+        first_pick_cumulative_stats2['totalPts'] = 0;
         first_pick_cumulative_stats2['totaleFG%'] = 0;
         first_pick_cumulative_stats2['totalPER'] = 0;
         first_pick_cumulative_stats2['highestPts'] = 0;
@@ -468,17 +480,17 @@
             cumulative_stats['totalPts'] = cumulative_stats['totalPts'] + d["PPG_total_average"];
           if (d["PPG_total_average"] > cumulative_stats['highestPts']){
             cumulative_stats['highestPts'] = d["PPG_total_average"];
-            cumulative_stats['highestPts_player'] = d["Player"]; 
+            cumulative_stats['highestPts_player'] = d["Player"];
           };
           cumulative_stats['totalPER'] = cumulative_stats['totalPER'] + d["PER_average"];
           if (d["PER_average"] > cumulative_stats['highestPER']){
             cumulative_stats['highestPER'] = d["PER_average"];
-            cumulative_stats['highestPER_Player'] = d["Player"]; 
+            cumulative_stats['highestPER_Player'] = d["Player"];
           };
           cumulative_stats['totaleFG%'] = cumulative_stats['totaleFG%'] + d["eFG%_average"];
           if (d["eFG%_average"] > cumulative_stats['highesteFG%']){
             cumulative_stats['highesteFG%'] = d["eFG%_average"];
-            cumulative_stats['highesteFG%_player'] = d["Player"]; 
+            cumulative_stats['highesteFG%_player'] = d["Player"];
           };
         cumulative_stats['Draft_Pts_average'] = cumulative_stats['totalPts'] / 14
         cumulative_stats['Draft_PER_average'] = cumulative_stats['totalPER'] / 14
@@ -489,7 +501,7 @@
 
         first_pick_cumulative_stats = {};
         first_pick_cumulative_stats['pick'] = 1
-        first_pick_cumulative_stats['totalPts'] = 0; 
+        first_pick_cumulative_stats['totalPts'] = 0;
         first_pick_cumulative_stats['totaleFG%'] = 0;
         first_pick_cumulative_stats['totalPER'] = 0;
         first_pick_cumulative_stats['highestPts'] = 0;
@@ -498,7 +510,7 @@
 
         second_pick_cumulative_stats = {};
         second_pick_cumulative_stats['pick'] = 2
-        second_pick_cumulative_stats['totalPts'] = 0; 
+        second_pick_cumulative_stats['totalPts'] = 0;
         second_pick_cumulative_stats['totaleFG%'] = 0;
         second_pick_cumulative_stats['totalPER'] = 0;
         second_pick_cumulative_stats['highestPts'] = 0;
@@ -507,7 +519,7 @@
 
         third_pick_cumulative_stats = {};
         third_pick_cumulative_stats['pick'] = 3
-        third_pick_cumulative_stats['totalPts'] = 0; 
+        third_pick_cumulative_stats['totalPts'] = 0;
         third_pick_cumulative_stats['totaleFG%'] = 0;
         third_pick_cumulative_stats['totalPER'] = 0;
         third_pick_cumulative_stats['highestPts'] = 0;
@@ -516,7 +528,7 @@
 
         fourth_pick_cumulative_stats = {};
         fourth_pick_cumulative_stats['pick'] = 4
-        fourth_pick_cumulative_stats['totalPts'] = 0; 
+        fourth_pick_cumulative_stats['totalPts'] = 0;
         fourth_pick_cumulative_stats['totaleFG%'] = 0;
         fourth_pick_cumulative_stats['totalPER'] = 0;
         fourth_pick_cumulative_stats['highestPts'] = 0;
@@ -525,7 +537,7 @@
 
         fifth_pick_cumulative_stats = {};
         fifth_pick_cumulative_stats['pick'] = 5
-        fifth_pick_cumulative_stats['totalPts'] = 0; 
+        fifth_pick_cumulative_stats['totalPts'] = 0;
         fifth_pick_cumulative_stats['totaleFG%'] = 0;
         fifth_pick_cumulative_stats['totalPER'] = 0;
         fifth_pick_cumulative_stats['highestPts'] = 0;
@@ -534,7 +546,7 @@
 
         sixth_pick_cumulative_stats = {};
         sixth_pick_cumulative_stats['pick'] = 6
-        sixth_pick_cumulative_stats['totalPts'] = 0; 
+        sixth_pick_cumulative_stats['totalPts'] = 0;
         sixth_pick_cumulative_stats['totaleFG%'] = 0;
         sixth_pick_cumulative_stats['totalPER'] = 0;
         sixth_pick_cumulative_stats['highestPts'] = 0;
@@ -544,7 +556,7 @@
 
         seventh_pick_cumulative_stats = {};
         seventh_pick_cumulative_stats['pick'] = 7
-        seventh_pick_cumulative_stats['totalPts'] = 0; 
+        seventh_pick_cumulative_stats['totalPts'] = 0;
         seventh_pick_cumulative_stats['totaleFG%'] = 0;
         seventh_pick_cumulative_stats['totalPER'] = 0;
         seventh_pick_cumulative_stats['highestPts'] = 0;
@@ -553,7 +565,7 @@
 
         eighth_pick_cumulative_stats = {};
         eighth_pick_cumulative_stats['pick'] = 8
-        eighth_pick_cumulative_stats['totalPts'] = 0; 
+        eighth_pick_cumulative_stats['totalPts'] = 0;
         eighth_pick_cumulative_stats['totaleFG%'] = 0;
         eighth_pick_cumulative_stats['totalPER'] = 0;
         eighth_pick_cumulative_stats['highestPts'] = 0;
@@ -562,7 +574,7 @@
 
         ninth_pick_cumulative_stats = {};
         ninth_pick_cumulative_stats['pick'] = 9
-        ninth_pick_cumulative_stats['totalPts'] = 0; 
+        ninth_pick_cumulative_stats['totalPts'] = 0;
         ninth_pick_cumulative_stats['totaleFG%'] = 0;
         ninth_pick_cumulative_stats['totalPER'] = 0;
         ninth_pick_cumulative_stats['highestPts'] = 0;
@@ -571,7 +583,7 @@
 
         tenth_pick_cumulative_stats = {};
         tenth_pick_cumulative_stats['pick'] = 10
-        tenth_pick_cumulative_stats['totalPts'] = 0; 
+        tenth_pick_cumulative_stats['totalPts'] = 0;
         tenth_pick_cumulative_stats['totaleFG%'] = 0;
         tenth_pick_cumulative_stats['totalPER'] = 0;
         tenth_pick_cumulative_stats['highestPts'] = 0;
@@ -688,7 +700,7 @@
             .attr("transform", "translate(0,0)")
             .style("font", "12px times")
             .call(overall_yaxis);
-          
+
           let overall_efg_xaxis = overallDraft_eFG.append("g")
             .attr("transform", "translate(0, 500)")
             .style("font","20px times")
@@ -706,7 +718,7 @@
             .style("font", "12px times")
             .call(overall_efg_yaxis);
 
-        //Function that updates the graph if PER or Pts was selected, 
+        //Function that updates the graph if PER or Pts was selected,
 
         function updateCumulative(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
@@ -721,7 +733,7 @@
                 .style("fill", "blue")
                 .attr("class", "average")
                 .on("mouseover",function(){
-                  d3.select(this) 
+                  d3.select(this)
                     .style("fill","red")
 
                 })
@@ -742,7 +754,7 @@
               .style("fill", "yellow")
               .attr("class", "highest")
               .on("mouseover",function(){
-                  d3.select(this) 
+                  d3.select(this)
                     .style("fill","red")
                   overallDraft_eFG.append("text")
                     .attr('id', d[z])
@@ -763,7 +775,7 @@
         };
 
 
-        //Function that updates the graph if eFG selected, 
+        //Function that updates the graph if eFG selected,
 
         function updateCumulative_efg(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
@@ -778,7 +790,7 @@
               .attr("fill", "blue")
               .attr("class", "average")
               .on("mouseover",function(){
-                d3.select(this) 
+                d3.select(this)
                   .style("fill","red")
               })
 
@@ -799,7 +811,7 @@
               .style("fill", "yellow")
               .attr("class", "highest")
               .on("mouseover",function(){
-                  d3.select(this) 
+                  d3.select(this)
                     .style("fill","red")
                   overallDraft_eFG.append("text")
                     .attr('id', d[z])
@@ -856,6 +868,7 @@
 
 
           var slider_container = d3.selectAll("#slider_div_pts").append("div");
+          var checkbox_container = d3.selectAll("#checkbox_div_pts").append("div");
 
           let rookie_classes = [rookie_stats_03,rookie_stats_04,rookie_stats_05,rookie_stats_06,rookie_stats_07,rookie_stats_08,rookie_stats_09,rookie_stats_10,rookie_stats_11,rookie_stats_12,rookie_stats_13,rookie_stats_14,rookie_stats_15,rookie_stats_16];
 
@@ -987,9 +1000,74 @@
             });
           }
 
+
+          function career_pts(year){
+            let index = 1;
+            let rookie_class = rookie_classes[year];
+            y_scale = pts.append("g")
+                .attr("transform","translate(80,10)")
+                .call(y_axis_pts);
+
+            career_stats = []
+            rookie_class.forEach(function(d,i){
+              career = cumulativeStats(d['Player']);
+              career_stats.push(career);
+
+            });
+
+
+            career_stats.forEach(function(d,i){
+              pts_chart.append('rect')
+                  .attr("width", "20")
+                  .attr("height", 500 - pts_scale(d['PPG_total_average']))
+                  .attr("x", player_scale(index) - 20)
+                  .attr("y", 510 - (500 - pts_scale(d['PPG_total_average'])))
+                  .attr("stroke", "black")
+                  .style("fill", "blue")
+                  .attr("transform", "translate(80,0)")
+              pts.append('text')
+                  .attr("text-anchor", "middle")
+                  .attr("x", player_scale(index) + 70)
+                  .attr("y", 530)
+                  .attr("font-family","Apple Ligothic")
+                  .attr("font-size", "12px")
+                  .text(d['Player']);
+              index++
+            });
+          }
+
           show_pts(0);
 
+          function update_graph(){
+            pts_chart.selectAll("rect").remove();
+            pts.selectAll("text").remove();
+            var slider = document.getElementById("mySlider");
+            if(slider == null){
+              year = 0;
+            }
+            else{
+              var year = Number(slider.value);
+            };
+
+            var checkbox = document.getElementById("myCheck");
+            if(checkbox.checked == true){
+              career_pts(year);
+            }
+            else{
+              show_pts(year);
+            }
+          };
+
+          checkbox_container.append('input')
+              .attr("type", "checkbox")
+              .attr("id", "myCheck")
+              .on("click", function(){
+                update_graph();
+              });
+
+
           slider_container.append("input")
+              .attr("id", "mySlider")
               .attr("type", "range")
               .attr("min", 0)
               .attr("max", 13)
@@ -998,11 +1076,9 @@
               .style("width", "300px")
               .attr("step", 1)
               .on("input", function(){
-                pts_chart.selectAll("rect").remove()
-                pts.selectAll("text").remove()
-                year = Number(this.value)
-                show_pts(year);
+                update_graph();
               });
+
 
 // -------------------------------- PER -------------------------------
           let per = d3.select("svg#per");
@@ -1017,6 +1093,7 @@
               .call(x_axis);
 
           var slider_container_PER = d3.selectAll("#slider_div_PER").append("div");
+          var checkbox_container_PER = d3.selectAll("#checkbox_div_PER").append("div");
 
 
           function show_per(year){
@@ -1045,8 +1122,72 @@
             });
           }
 
+          function career_PER(year){
+            let index = 1;
+            let rookie_class = rookie_classes[year];
+            y_scale = per.append("g")
+                .attr("transform","translate(80,10)")
+                .call(y_axis_per);
+
+            career_stats = []
+            rookie_class.forEach(function(d,i){
+              career = cumulativeStats(d['Player']);
+              career_stats.push(career);
+
+            });
+
+
+            career_stats.forEach(function(d,i){
+              per_chart.append('rect')
+                  .attr("width", "20")
+                  .attr("height", 500 - per_scale(d['PER_average']))
+                  .attr("x", player_scale(index) - 20)
+                  .attr("y", 510 - (500 - per_scale(d['PER_average'])))
+                  .attr("stroke", "black")
+                  .style("fill", "blue")
+                  .attr("transform", "translate(80,0)")
+              per.append('text')
+                  .attr("text-anchor", "middle")
+                  .attr("x", player_scale(index) + 70)
+                  .attr("y", 530)
+                  .attr("font-family","Apple Ligothic")
+                  .attr("font-size", "12px")
+                  .text(d['Player']);
+              index++
+            });
+          }
+
           show_per(0);
+
+          function update_graph_PER(){
+            per_chart.selectAll("rect").remove();
+            per.selectAll("text").remove();
+            var slider_per = document.getElementById("mySliderPER");
+            if(slider_per == null){
+              year = 0;
+            }
+            else{
+              var year = Number(slider_per.value);
+            };
+
+            var checkbox = document.getElementById("myCheckPER");
+            if(checkbox.checked == true){
+              career_PER(year);
+            }
+            else{
+              show_per(year);
+            }
+          };
+
+          checkbox_container_PER.append('input')
+              .attr("type", "checkbox")
+              .attr("id", "myCheckPER")
+              .on("click", function(){
+                update_graph_PER();
+              });
+
           slider_container_PER.append("input")
+              .attr("id", "mySliderPER")
               .attr("type", "range")
               .attr("min", 0)
               .attr("max", 13)
@@ -1055,10 +1196,7 @@
               .style("width", "300px")
               .attr("step", 1)
               .on("input", function(){
-                per_chart.selectAll("rect").remove()
-                per.selectAll("text").remove()
-                year = Number(this.value)
-                show_per(year);
+                update_graph_PER();
               });
 
           // console.log(rookie_stats_03);
@@ -1069,7 +1207,7 @@
         let eFG = d3.select("svg#eFG");
         let eFG_chart = eFG.append('g');
 
-        let eFG_scale = d3.scaleLinear().domain([1, 0]).range([0, 500]);
+        let eFG_scale = d3.scaleLinear().domain([.7, 0]).range([0, 500]);
 
         var y_axis_eFG = d3.axisLeft(eFG_scale).ticks(10);
 
@@ -1078,6 +1216,7 @@
             .call(x_axis);
 
         var slider_container_eFG = d3.selectAll("#slider_div_eFG").append("div");
+        var checkbox_container_eFG = d3.selectAll("#checkbox_div_eFG").append("div");
 
 
         function show_eFG(year){
@@ -1106,8 +1245,72 @@
           });
         }
 
+        function career_eFG(year){
+          let index = 1;
+          let rookie_class = rookie_classes[year];
+          y_scale = eFG.append("g")
+              .attr("transform","translate(80,10)")
+              .call(y_axis_eFG);
+
+          career_stats = []
+          rookie_class.forEach(function(d,i){
+            career = cumulativeStats(d['Player']);
+            career_stats.push(career);
+
+          });
+
+
+          career_stats.forEach(function(d,i){
+            eFG_chart.append('rect')
+                .attr("width", "20")
+                .attr("height", 500 - eFG_scale(d['eFG%_average']))
+                .attr("x", player_scale(index) - 20)
+                .attr("y", 510 - (500 - eFG_scale(d['eFG%_average'])))
+                .attr("stroke", "black")
+                .style("fill", "blue")
+                .attr("transform", "translate(80,0)")
+            eFG.append('text')
+                .attr("text-anchor", "middle")
+                .attr("x", player_scale(index) + 70)
+                .attr("y", 530)
+                .attr("font-family","Apple Ligothic")
+                .attr("font-size", "12px")
+                .text(d['Player']);
+            index++
+          });
+        }
+
         show_eFG(0);
+
+        function update_graph_eFG(){
+          eFG_chart.selectAll("rect").remove();
+          eFG.selectAll("text").remove();
+          var slider_eFG = document.getElementById("mySlidereFG");
+          if(slider_eFG == null){
+            year = 0;
+          }
+          else{
+            var year = Number(slider_eFG.value);
+          };
+
+          var checkbox = document.getElementById("myCheckeFG");
+          if(checkbox.checked == true){
+            career_eFG(year);
+          }
+          else{
+            show_eFG(year);
+          }
+        };
+
+        checkbox_container_eFG.append('input')
+            .attr("type", "checkbox")
+            .attr("id", "myCheckeFG")
+            .on("click", function(){
+              update_graph_eFG();
+            });
+
         slider_container_eFG.append("input")
+            .attr("id", "mySlidereFG")
             .attr("type", "range")
             .attr("min", 0)
             .attr("max", 13)
@@ -1116,10 +1319,7 @@
             .style("width", "300px")
             .attr("step", 1)
             .on("input", function(){
-              eFG_chart.selectAll("rect").remove()
-              eFG.selectAll("text").remove()
-              year = Number(this.value)
-              show_eFG(year);
+              update_graph_eFG();
             });
 
         });
