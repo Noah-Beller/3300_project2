@@ -9,14 +9,22 @@
   <body>
 
   <h1> Can Draft Pick Order Predict NBA Success? </h1>
-      <select id = 'statistic'>
+  <p> 
+    This first graph that show the average of the statistic from each draft pick number and right next to it who 
+    had the highest statistic from drafted in that pick number. You can select which statistic to look out with this dropdown menu. 
+    You can also see the specific individual player name by mousing over the specific bar. 
+  </p>
+      <div id="select">
+        <select id = 'statistic'>
           <option value = "points" selected = "selected">Points</option>
           <option value = "PER"> PER </option>
           <option value = "eFG%">eFG% </option>
         </select>
-        <br>
+      </div>
 
     <svg id = "cumulative" height = "600" width = "1300"></svg>
+
+
     <svg id = "pts" height = "600" width = "950">
 
     </svg>
@@ -578,31 +586,9 @@
 
         console.log(totalCumulativeStatistics);
 
-        // first_pick_statistics.forEach(function(d,i){
-        //   first_pick_cumulative_stats['totalPts'] = first_pick_cumulative_stats['totalPts'] + d["PPG_total_average"];
-        //   if (d["PPG_total_average"] > first_pick_cumulative_stats['highestPts']){
-        //     first_pick_cumulative_stats['highestPts'] = d["PPG_total_average"];
-        //     first_pick_cumulative_stats['highestPts_player'] = d["Player"]; 
-        //   };
-        //   first_pick_cumulative_stats['totalPER'] = first_pick_cumulative_stats['totalPER'] + d["PER_average"];
-        //   if (d["PER_average"] > first_pick_cumulative_stats['highestPER']){
-        //     first_pick_cumulative_stats['highestPER'] = d["PER_average"];
-        //     first_pick_cumulative_stats['highestPER_Player'] = d["Player"]; 
-        //   };
-        //   first_pick_cumulative_stats['totaleFG%'] = first_pick_cumulative_stats['totaleFG%'] + d["eFG%_average"];
-        //   if (d["eFG%_average"] > first_pick_cumulative_stats['highesteFG%']){
-        //     first_pick_cumulative_stats['highesteFG%'] = d["eFG%_average"];
-        //     first_pick_cumulative_stats['highesteFG%_player'] = d["Player"]; 
-        //   };
-        // first_pick_cumulative_stats['Draft_Pts_average'] = first_pick_cumulative_stats['totalPts'] / 14
-        // first_pick_cumulative_stats['Draft_PER_average'] = first_pick_cumulative_stats['totalPER'] / 14
-        // first_pick_cumulative_stats['Draft_eFG%_average'] = first_pick_cumulative_stats['totaleFG%'] / 14
-
-        // });
-
 
         // -------------------------------- Overview -------------------------------
-
+        // Looking for values for proper Y-axis
           var highestPoints = 0;
           totalCumulativeStatistics.forEach(function(d,i){
             if (d["highestPts"] > highestPoints){
@@ -626,6 +612,8 @@
             }
           });
           console.log(highesteFG);
+
+          // Setting up X and Y Axis
 
           let overallDrafts = d3.select("svg#cumulative");
           let overallDrafts_chart = overallDrafts.append('g')
@@ -673,6 +661,8 @@
             .style("font", "12px times")
             .call(overall_efg_yaxis);
 
+        //Function that updates the graph if PER or Pts was selected, 
+
         function updateCumulative(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
             temp_average = Math.round(d[x]*10)/10
@@ -694,7 +684,6 @@
                   d3.select(this)
                     .style("fill", "blue");
                 })
-
             overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick'])-30)
              .attr("y", overall_yscale(d[x])-10)
@@ -721,13 +710,15 @@
                     .style("fill", "yellow");
                   d3.select("#"+ d[z]).remove();
                 })
-
             overallDraft_eFG.append("text")
              .attr("x", overall_xscale(d['pick']))
              .attr("y", overall_yscale(d[y])-10)
              .text(temp_highest.toString());
           });
         };
+
+
+        //Function that updates the graph if eFG selected, 
 
         function updateCumulative_efg(x,y,z){
           totalCumulativeStatistics.forEach(function(d,i){
@@ -783,12 +774,12 @@
           });
         };
 
+        //initalizes a graph
         updateCumulative('Draft_Pts_average','highestPts','highestPts_player');
 
         d3.select("#statistic")
           .on('change', function(){
               overallDrafts_chart.selectAll("rect").remove()
-              // overallDrafts_chart.selectAll("text").remove()
               overallDraft_eFG.selectAll("rect").remove()
               overallDraft_eFG.selectAll("text").remove()
               temp_statistic = d3.select(this).property('value');
@@ -801,42 +792,6 @@
               }
           });
 
-        // var bar = svg.selectAll("")
-
-          // totalCumulativeStatistics.forEach(function(d,i){
-          //   overallDrafts_chart.append('rect')
-          //     .attr("width","20")
-          //     .attr("height", 500-overall_yscale(d['Draft_Pts_average']))
-          //     .attr("x", overall_xscale(d['pick'])-20)
-          //     .attr("y", overall_yscale(d['Draft_Pts_average']))
-          //     .attr("stroke", "black")
-          //     .style("fill", "blue")
-          //   overallDrafts_chart.append('rect')
-          //     .attr("width", "20")
-          //     .attr("height", 500-overall_yscale(d['highestPts']))
-          //     .attr("x", overall_xscale(d['pick']))
-          //     .attr("y", overall_yscale(d['highestPts']))
-          //     .attr("stroke", "black")
-          //     .style("fill", "yellow")
-          // });
-
-          // per_chart.append('rect')
-          //         .attr("width", "20")
-          //         .attr("height", 500 - per_scale(d['PER']))
-          //         .attr("x", player_scale(index) - 20)
-          //         .attr("y", 510 - (500 - per_scale(d['PER'])))
-          //         .attr("stroke", "black")
-          //         .style("fill", "orange")
-          //         .attr("transform", "translate(80,0)")
-          //     per.append('text')
-          //         .attr("text-anchor", "middle")
-          //         .attr("x", player_scale(index) + 70)
-          //         .attr("y", 530)
-          //         .attr("font-family","Apple Ligothic")
-          //         .attr("font-size", "12px")
-          //         .text(d['Player']);
-          //     index++
-          
 
 
         // -------------------------------- PTS -------------------------------
