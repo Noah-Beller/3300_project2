@@ -15,6 +15,10 @@
 
     </div>
 
+    <div id = 'checkbox_div_pts'>
+
+    </div>
+
     <svg id = 'per' height = "600" width = "950">
 
     </svg>
@@ -450,6 +454,7 @@
 
 
           var slider_container = d3.selectAll("#slider_div_pts").append("div");
+          var checkbox_container = d3.selectAll("#checkbox_div_pts").append("div");
 
           let rookie_classes = [rookie_stats_03,rookie_stats_04,rookie_stats_05,rookie_stats_06,rookie_stats_07,rookie_stats_08,rookie_stats_09,rookie_stats_10,rookie_stats_11,rookie_stats_12,rookie_stats_13,rookie_stats_14,rookie_stats_15,rookie_stats_16];
 
@@ -580,7 +585,48 @@
             });
           }
 
+
+          function career_pts(year){
+            let index = 1;
+            let rookie_class = rookie_classes[year];
+            y_scale = pts.append("g")
+                .attr("transform","translate(80,10)")
+                .call(y_axis_pts);
+
+            career_stats = []
+            rookie_class.forEach(function(d,i){
+              career = cumulativeStats(d['Player']);
+              career_stats.push(career);
+
+            });
+
+
+            career_stats.forEach(function(d,i){
+              pts_chart.append('rect')
+                  .attr("width", "20")
+                  .attr("height", 500 - pts_scale(d['PPG_total_average']))
+                  .attr("x", player_scale(index) - 20)
+                  .attr("y", 510 - (500 - pts_scale(d['PPG_total_average'])))
+                  .attr("stroke", "black")
+                  .style("fill", "blue")
+                  .attr("transform", "translate(80,0)")
+              pts.append('text')
+                  .attr("text-anchor", "middle")
+                  .attr("x", player_scale(index) + 70)
+                  .attr("y", 530)
+                  .attr("font-family","Apple Ligothic")
+                  .attr("font-size", "12px")
+                  .text(d['Player']);
+              index++
+            });
+          }
+
           show_pts(0);
+
+          checkbox_container.append('input')
+              .attr("type", "checkbox")
+              .attr("id", "myCheck")
+              .attr("onclick", "career_pts()");
 
           slider_container.append("input")
               .attr("type", "range")
@@ -594,8 +640,15 @@
                 pts_chart.selectAll("rect").remove()
                 pts.selectAll("text").remove()
                 year = Number(this.value)
-                show_pts(year);
+                var checkbox = document.getElementById("myCheck");
+                if(checkbox.checked == true){
+                  career_pts(year);
+                }
+                else{
+                  show_pts(year);
+                }
               });
+
 
 // -------------------------------- PER -------------------------------
           let per = d3.select("svg#per");
